@@ -13,7 +13,10 @@ def register(request):
             user = form.save()
             login(request, user)
             messages.success(request, 'Registration successful. Welcome!')
-            return redirect('dashboard')  # You'll define this later
+            return redirect('dashboard')
+        else:
+            messages.error(request, 'Registration failed. Please correct the error below.')
+            print(form.errors)  # This will log the problem
     else:
         form = CustomUserCreationForm()
     return render(request, 'accounts/register.html', {'form': form})
