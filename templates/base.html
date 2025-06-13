@@ -6,12 +6,29 @@
 </head>
 <body>
     <header>
-        <h1>Guitar Practice Tracker</h1>
-        {% if user.is_authenticated %}
-            <p>Logged in as {{ user.username }} | <a href="{% url 'logout' %}">Logout</a></p>
-        {% else %}
-            <p><a href="{% url 'login' %}">Login</a> | <a href="{% url 'register' %}">Register</a></p>
+        {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
         {% endif %}
+
+        <h1><a href="{% url 'home' %}">Guitar Practice Tracker</h1>
+
+        <nav>
+            <ul>
+             {% if user.is_authenticated %}
+               <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+               <li><a href="{% url 'profile' %}">{{ user.username }}'s Profile</a></li>
+               <li><a href="{% url 'logout' %}">Logout</a></li>
+             {% else %}
+               <li><a href="{% url 'login' %}">Login</a></li>
+               <li><a href="{% url 'register' %}">Register</a></li>
+             {% endif %}
+           </ul>
+         </nav>
+
     </header>
     
     <hr>

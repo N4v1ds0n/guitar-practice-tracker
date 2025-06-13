@@ -9,8 +9,9 @@ urlpatterns = [
         template_name='accounts/login.html',
         authentication_form=CustomAuthenticationForm
     ), name='login'),
-    path('logout/',
-         auth_views.LogoutView.as_view(next_page='login'),
-         name='logout'
-         ),
+    path(
+        'logout/',
+        views.custom_logout, name='logout'
+        ),
+    path('profile/', views.profile, name='profile'),
 ]
