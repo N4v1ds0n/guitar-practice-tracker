@@ -6,9 +6,6 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 
-from .forms import CustomUserChangeForm
-from .models import CustomUser
-
 # Create your views here.
 
 
@@ -21,7 +18,7 @@ def register(request):
             messages.success(request, 'Registration successful. Welcome!')
             return redirect('dashboard')
         else:
-            messages.error(request, 'Registration failed. Please correct the error below.')
+            messages.error(request, 'Registration failed.')
     else:
         form = CustomUserCreationForm()
     return render(request, 'accounts/register.html', {'form': form})
@@ -36,7 +33,7 @@ def custom_logout(request):
 @login_required
 def profile(request):
     user = request.user
-    
+
     if request.method == 'POST':
         profile_form = CustomUserChangeForm(request.POST, instance=user)
         password_form = PasswordChangeForm(user, request.POST)

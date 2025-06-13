@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Session on {{ session.date }}{% endblock %}
+
+{% block content %}
+  <h2>Practice Session – {{ session.date }}</h2>
+
+  <p><strong>Duration:</strong> {{ session.duration_minutes }} minutes</p>
+  <p><strong>Speed:</strong> {{ session.speed }}</p>
+  <p><strong>Mistakes:</strong> {{ session.mistakes }}</p>
+
+  {% if session.goal %}
+    <p><strong>Associated Goal:</strong>
+      <a href="{% url 'goal_detail' session.goal.pk %}">{{ session.goal.title }}</a>
+    </p>
+  {% else %}
+    <p><em>No goal linked to this session.</em></p>
+  {% endif %}
+
+  <a href="{% url 'session_list' %}">← Back to Sessions</a>
+{% endblock %}
