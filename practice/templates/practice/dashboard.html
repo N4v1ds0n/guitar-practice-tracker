@@ -15,10 +15,14 @@
       <ul style="max-height: 300px; overflow-y: auto;">
         {% for goal in goals %}
           <li>
-            <a href="{% url 'goal_detail' goal.id %}">{{ goal.title }}</a>
+            <strong>{{ goal.title }}</strong><br>
+            {% for key, target in goal.get_metrics.items %}
+              {{ key|title }}: {{ target }}<br>
+            {% endfor %}
+            <a href="{% url 'goal_detail' goal.id %}">Details</a>
           </li>
         {% empty %}
-          <li>No goals yet.</li>
+         <li>No goals yet.</li>
         {% endfor %}
       </ul>
     </div>
@@ -32,10 +36,11 @@
       <ul style="max-height: 300px; overflow-y: auto;">
         {% for session in sessions %}
           <li>
-            {{ session.date }} – {{ session.duration }} mins
+            <a href="{% url 'session_detail' session.pk %}">
+              {{ session.date|date:"M d, Y" }} — {{ session.duration }} min
+              {% if session.goal %}(Goal: {{ session.goal.title }}){% endif %}
+            </a>
           </li>
-        {% empty %}
-          <li>No sessions logged yet.</li>
         {% endfor %}
       </ul>
     </div>

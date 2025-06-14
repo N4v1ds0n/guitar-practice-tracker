@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import JSONField
 from django.conf import settings
 from django.utils import timezone
 from accounts.models import CustomUser as User
@@ -28,8 +29,8 @@ class StandardGoalDefinition(models.Model):
 
     def __str__(self):
         return self.name
-    
-    
+
+
 # Model for Goals that users can set and track
 
 class Goal(models.Model):
@@ -46,8 +47,24 @@ class Goal(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     target_date = models.DateField(null=True, blank=True)
 
+    metrics = JSONField(
+        null=True,
+        blank=True,
+        help_text='Dict of target values for selected metrics (e.g. {"tempo": 120, "mistakes": 0})'
+    )
+
     def is_standard(self):
         return self.standard_goal is not None
+
+    def get_metrics(self):
+        if self.is_standard():
+            return self.standard_goal.metrics
+        return list(self.metrics.keys()) if self.metrics else []
+
+    def get_target_for(self, metric):
+        if self.is_standard():
+            return self.standard_goal.metrics.get(metric)
+        return self.metrics.get(metric) if self.metrics else None
 
     def __str__(self):
         return self.title
@@ -74,3 +91,21 @@ class PracticeSession(models.Model):
 
     def __str__(self):
         return f"Session on {self.date.date()} for goal '{self.goal}'"
+    
+    
+def get_progress(self):
+    # Sum all metrics from related sessions
+    from collections import defaultdict
+    total = defaultdict(float)
+
+    for session in self.sessions.all():
+        for metric in self.get_metrics():
+            val = getattr(session, metric, 0)
+            if val:
+                total[metric] += val
+
+    progress = {}
+    for metric, target in self.get_metrics().items():
+        achieved = total[metric]
+        progress[metric] = min(100, round((achieved / target) * 100, 2)) if target else 0
+    return progress
