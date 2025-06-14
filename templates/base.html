@@ -22,8 +22,6 @@
                 <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
                 <li><a href="{% url 'profile' %}">{{ user.username }}'s Profile</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
-                <li><a href="{% url 'goals_list' %}">Goals</a></li>
-                <li><a href="{% url 'session_create' %}">Log Practice</a></li>
             {% else %}
                 <li><a href="{% url 'login' %}">Login</a></li>
                 <li><a href="{% url 'register' %}">Register</a></li>

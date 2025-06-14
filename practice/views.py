@@ -8,7 +8,12 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def dashboard(request):
-    return render(request, 'practice/dashboard.html')
+    goals = Goal.objects.filter(user=request.user).order_by('-created_at')
+    sessions = PracticeSession.objects.filter(user=request.user).order_by('-date')
+    return render(request, 'practice/dashboard.html', {
+        'goals': goals,
+        'sessions': sessions
+        })
 
 
 def home(request):
@@ -39,7 +44,7 @@ def goal_create(request):
             goal = form.save(commit=False)
             goal.user = request.user
             goal.save()
-            return redirect('goals_list')
+            return redirect('dashboard')
     else:
         form = GoalForm()
     return render(request, 'practice/goal_form.html', {'form': form})
@@ -53,7 +58,7 @@ def session_create(request):
             session = form.save(commit=False)
             session.user = request.user
             session.save()
-            return redirect('dashboard')
+            return redirect('practice/dashboard')
     else:
         form = PracticeSessionForm()
     return render(request, 'practice/session_form.html', {'form': form})

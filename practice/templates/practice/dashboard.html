@@ -1,6 +1,44 @@
 {% extends "base.html" %}
 {% block title %}Dashboard{% endblock %}
 {% block content %}
-  <h2>Welcome, {{ user.username }}!</h2>
+  <h1>Welcome, {{ user.username }}!</h1>
   <p>This is your practice dashboard 🎸</p>
+
+  <div style="display: flex; flex-direction: column; gap: 2rem;">
+  
+    <!-- Goals Section -->
+    <div style="height: 50%; border-bottom: 1px solid #ccc;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>Goals</h2>
+        <a href="{% url 'create_goal' %}">+ Add Goal</a>
+      </div>
+      <ul style="max-height: 300px; overflow-y: auto;">
+        {% for goal in goals %}
+          <li>
+            <a href="{% url 'goal_detail' goal.id %}">{{ goal.title }}</a>
+          </li>
+        {% empty %}
+          <li>No goals yet.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  
+    <!-- Practice Sessions Section -->
+    <div>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>Practice Sessions</h2>
+        <a href="{% url 'create_session' %}">+ Log Practice</a>
+      </div>
+      <ul style="max-height: 300px; overflow-y: auto;">
+        {% for session in sessions %}
+          <li>
+            {{ session.date }} – {{ session.duration }} mins
+          </li>
+        {% empty %}
+          <li>No sessions logged yet.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  
+  </div>
 {% endblock %}
