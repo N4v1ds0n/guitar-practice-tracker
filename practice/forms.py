@@ -41,13 +41,15 @@ class PracticeSessionForm(forms.ModelForm):
         fields = ['goal', 'duration', 'tempo', 'mistakes', 'accuracy', 'notes']
 
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
+        if user:
+            self.fields['goal'].queryset = Goal.objects.filter(user=user)
 
         # If editing, restrict fields based on goal
         goal = self.initial.get('goal') or self.data.get('goal')
         if goal:
             try:
-                from practice.models import Goal
                 if isinstance(goal, Goal):
                     goal_obj = goal
                 else:

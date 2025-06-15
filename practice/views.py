@@ -53,14 +53,14 @@ def goal_create(request):
 @login_required
 def session_create(request):
     if request.method == 'POST':
-        form = PracticeSessionForm(request.POST)
+        form = PracticeSessionForm(request.POST, user=request.user)
         if form.is_valid():
             session = form.save(commit=False)
             session.user = request.user
             session.save()
             return redirect('dashboard')
     else:
-        form = PracticeSessionForm()
+        form = PracticeSessionForm(user=request.user)
     return render(request, 'practice/session_form.html', {'form': form})
 
 
@@ -69,7 +69,7 @@ def session_create_for_goal(request, goal_id):
     goal = get_object_or_404(Goal, id=goal_id, user=request.user)
 
     if request.method == 'POST':
-        form = PracticeSessionForm(request.POST)
+        form = PracticeSessionForm(request.POST, user=request.user)
         if form.is_valid():
             session = form.save(commit=False)
             session.user = request.user
