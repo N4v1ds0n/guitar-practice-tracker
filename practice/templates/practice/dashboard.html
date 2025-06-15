@@ -1,49 +1,54 @@
 {% extends "base.html" %}
 {% block title %}Dashboard{% endblock %}
+
 {% block content %}
+<div class="container">
   <h1>Welcome, {{ user.username }}!</h1>
   <p>This is your practice dashboard 🎸</p>
 
-  <div style="display: flex; flex-direction: column; gap: 2rem;">
-  
+  <div class="dashboard-sections">
+
     <!-- Goals Section -->
-    <div style="height: 50%; border-bottom: 1px solid #ccc;">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
+    <section class="dashboard-section">
+      <div class="section-header">
         <h2>Goals</h2>
-        <a href="{% url 'create_goal' %}">+ Add Goal</a>
+        <a href="{% url 'create_goal' %}" class="btn-link">+ Add Goal</a>
       </div>
-      <ul style="max-height: 300px; overflow-y: auto;">
+      <ul class="item-list">
         {% for goal in goals %}
-          <li>
+          <li class="item-card">
             <strong>{{ goal.title }}</strong><br>
             {% for key, target in goal.get_metrics.items %}
               {{ key|title }}: {{ target }}<br>
             {% endfor %}
-            <a href="{% url 'goal_detail' goal.id %}">Details</a>
+            <a href="{% url 'goal_detail' goal.id %}" class="item-link">Details</a>
           </li>
         {% empty %}
-         <li>No goals yet.</li>
+          <li class="item-card">No goals yet.</li>
         {% endfor %}
       </ul>
-    </div>
-  
+    </section>
+
     <!-- Practice Sessions Section -->
-    <div>
-      <div style="display: flex; justify-content: space-between; align-items: center;">
+    <section class="dashboard-section">
+      <div class="section-header">
         <h2>Practice Sessions</h2>
-        <a href="{% url 'create_session' %}">+ Log Practice</a>
+        <a href="{% url 'create_session' %}" class="btn-link">+ Log Practice</a>
       </div>
-      <ul style="max-height: 300px; overflow-y: auto;">
+      <ul class="item-list">
         {% for session in sessions %}
-          <li>
-            <a href="{% url 'session_detail' session.pk %}">
+          <li class="item-card">
+            <a href="{% url 'session_detail' session.pk %}" class="item-link">
               {{ session.date|date:"M d, Y" }} — {{ session.duration }} min
               {% if session.goal %}(Goal: {{ session.goal.title }}){% endif %}
             </a>
           </li>
+        {% empty %}
+          <li class="item-card">No sessions logged yet.</li>
         {% endfor %}
       </ul>
-    </div>
-  
+    </section>
+
   </div>
+</div>
 {% endblock %}
