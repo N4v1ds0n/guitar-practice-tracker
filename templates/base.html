@@ -5,38 +5,50 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Guitar Tracker{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <header>
-        {% if messages %}
-            <ul class="messages">
-              {% for message in messages %}
-                <li class="{{ message.tags }}">{{ message }}</li>
-              {% endfor %}
-            </ul>
-        {% endif %}
+    <header class="site-header">
+        <div class="container">
+            <h1 class="logo"><a href="{% url 'home' %}">🎸 Guitar Practice Tracker</a></h1>
 
-        <h1><a href="{% url 'home' %}">Guitar Practice Tracker</h1>
-
-        <nav>
-            <ul>
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                <li><a href="{% url 'profile' %}">{{ user.username }}'s Profile</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-            {% else %}
-                <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'register' %}">Register</a></li>
-            {% endif %}
-            </ul>
-        </nav>
-
+            <nav class="main-nav">
+                <ul>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li><a href="{% url 'profile' %}">{{ user.username }}</a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        <li><a href="{% url 'register' %}">Register</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
     </header>
-    
-    <hr>
-    
-    {% block content %}{% endblock %}
+
+    {% if messages %}
+        <section class="messages">
+            <div class="container">
+                <ul>
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    {% endif %}
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2025 Guitar Practice Tracker — Practice makes perfect 🎶</p>
+        </div>
+    </footer>
 </body>
 </html>
