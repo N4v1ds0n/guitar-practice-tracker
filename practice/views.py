@@ -45,6 +45,8 @@ def goal_create(request):
             goal.user = request.user
             goal.save()
             return redirect('dashboard')
+        else:
+            print(form.errors)
     else:
         form = GoalForm()
     return render(request, 'practice/goal_form.html', {'form': form})

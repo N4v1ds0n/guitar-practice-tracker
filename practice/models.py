@@ -111,7 +111,7 @@ class Goal(models.Model):
         if not self.metrics:
             return 0
 
-        sessions = self.practice_sessions.all()  # assumes related_name='practice_sessions'
+        sessions = self.sessions.all()  # assumes related_name='practice_sessions'
         if not sessions.exists():
             return 0
 

@@ -23,8 +23,29 @@
 
   <section>
     <h2>Progress</h2>
-    <p class="text-muted"><em>Progress tracking coming soon...</em></p>
-    <!-- Later we can replace this with a progress bar -->
+    {% with progress=goal.get_overall_progress %}
+      {% for metric, value in progress.items %}
+        <div style="margin-bottom: 1em;">
+          <strong>{{ metric|title }}</strong>
+          <div style="background-color: #e0e0e0; height: 20px; width: 100%; border-radius: 5px;">
+            <div style="
+              background-color: #4caf50;
+              width: {{ value|floatformat:0 }}%;
+              height: 100%;
+              border-radius: 5px;
+              text-align: right;
+              padding-right: 5px;
+              color: white;
+              font-size: 12px;
+            ">
+              {{ value|floatformat:0 }}%
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p>No progress available yet.</p>
+      {% endfor %}
+    {% endwith %}
   </section>
 
   <hr>

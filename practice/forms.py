@@ -6,6 +6,9 @@ class GoalForm(forms.ModelForm):
     class Meta:
         model = Goal
         fields = ['title', 'description', 'standard_goal', 'target_date']
+        widgets = {
+            'target_date': forms.DateInput(attrs={'type': 'date'}),
+        }
 
     # Custom goal metric fields
     starting_tempo = forms.IntegerField(required=False, label="Starting Tempo")
@@ -37,6 +40,12 @@ class GoalForm(forms.ModelForm):
             cleaned_data['metrics'] = metrics
 
         return cleaned_data
+    
+    def clean_metrics(self):
+        metrics = self.cleaned_data['metrics']
+        if any(isinstance(v, dict) for v in metrics.values()):
+            raise forms.ValidationError("Metric values must be flat numbers, not dictionaries.")
+        return metrics
 
     def save(self, commit=True):
         goal = super().save(commit=False)
