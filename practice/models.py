@@ -3,6 +3,8 @@ from django.db.models import JSONField
 from django.conf import settings
 from django.utils import timezone
 from accounts.models import CustomUser as User
+from collections import defaultdict
+from statistics import mean
 
 # Create your models here.
 
@@ -103,6 +105,43 @@ class Goal(models.Model):
                 progress[metric] = min(100, round((total / target) * 100, 2))
 
         return progress
+
+    def get_overall_progress(self):
+
+        if not self.metrics:
+            return 0
+
+        sessions = self.practice_sessions.all()  # assumes related_name='practice_sessions'
+        if not sessions.exists():
+            return 0
+
+        metric_progress = {}
+        for metric, target_value in self.metrics.items():
+            # Collect non-null values from sessions
+            values = [getattr(session, metric, None) for session in sessions if getattr(session, metric, None) is not None]
+            if not values:
+                continue
+
+            if metric == 'mistakes':
+                # Lower is better
+                current_value = min(values)
+                progress = max(0, 1 - (current_value / target_value))  # e.g., from 5 to 0 mistakes
+            else:
+                # Higher is better
+                current_value = max(values)
+                progress = min(1, current_value / target_value)
+
+            metric_progress[metric] = round(progress * 100, 1)
+
+        if not metric_progress:
+            return 0
+
+        # Return average of all tracked metric progress percentages
+        return round(sum(metric_progress.values()) / len(metric_progress), 1)
+
+    def is_complete(self):
+        """Returns True if overall progress has reached or exceeded 100%."""
+        return self.get_overall_progress() >= 100
 
     def __str__(self):
         return self.title
