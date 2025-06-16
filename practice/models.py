@@ -47,11 +47,13 @@ class Goal(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     target_date = models.DateField(null=True, blank=True)
 
+    # Metrics config
     metrics = JSONField(
         null=True,
         blank=True,
-        help_text='Dict of target values for selected metrics (e.g. {"tempo": 120, "mistakes": 0})'
+        help_text='Dict of target values for selected metrics (e.g. {"tempo": 120, "mistakes": 0, "duration": 300})'
     )
+    start_tempo = models.PositiveIntegerField(null=True, blank=True)
 
     def is_standard(self):
         return self.standard_goal is not None
@@ -65,6 +67,42 @@ class Goal(models.Model):
         if self.is_standard():
             return self.standard_goal.metrics.get(metric)
         return self.metrics.get(metric) if self.metrics else None
+
+    def get_progress(self):
+        """
+        Returns progress for each tracked metric as a percentage.
+        """
+        sessions = self.sessions.all()
+        progress = {}
+
+        for metric in self.get_metrics():
+            target = self.get_target_for(metric)
+            if not target:
+                progress[metric] = 0
+                continue
+
+            if metric == "tempo":
+                latest = max([s.tempo for s in sessions if s.tempo], default=self.start_tempo or 0)
+                base = self.start_tempo or 0
+                progress[metric] = min(100, round(((latest - base) / (target - base)) * 100, 2)) if target > base else 0
+
+            elif metric == "duration":
+                total = sum([s.duration for s in sessions])
+                progress[metric] = min(100, round((total / target) * 100, 2))
+
+            elif metric == "mistakes":
+                if not sessions:
+                    progress[metric] = 0
+                else:
+                    success_sessions = [s for s in sessions if s.mistakes is not None and s.mistakes <= target]
+                    progress[metric] = round((len(success_sessions) / len(sessions)) * 100, 2)
+
+            else:
+                # Generic metric fallback
+                total = sum([getattr(s, metric, 0) or 0 for s in sessions])
+                progress[metric] = min(100, round((total / target) * 100, 2))
+
+        return progress
 
     def __str__(self):
         return self.title
@@ -86,26 +124,8 @@ class PracticeSession(models.Model):
     tempo = models.PositiveIntegerField(null=True, blank=True)
     mistakes = models.PositiveIntegerField(null=True, blank=True)
     accuracy = models.FloatField(null=True, blank=True)
-    progress_percent = models.FloatField(null=True, blank=True)
     notes = models.TextField(blank=True)
 
     def __str__(self):
         return f"Session on {self.date.date()} for goal '{self.goal}'"
-    
-    
-def get_progress(self):
-    # Sum all metrics from related sessions
-    from collections import defaultdict
-    total = defaultdict(float)
 
-    for session in self.sessions.all():
-        for metric in self.get_metrics():
-            val = getattr(session, metric, 0)
-            if val:
-                total[metric] += val
-
-    progress = {}
-    for metric, target in self.get_metrics().items():
-        achieved = total[metric]
-        progress[metric] = min(100, round((achieved / target) * 100, 2)) if target else 0
-    return progress

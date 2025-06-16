@@ -3,55 +3,59 @@
 {% block title %}Goal: {{ goal.title }}{% endblock %}
 
 {% block content %}
-  <h2>{{ goal.title }}</h2>
+<div class="container">
+  <h1>{{ goal.title }}</h1>
 
-  <p><strong>Description:</strong> {{ goal.description|default:"(No description)" }}</p>
+  <div class="goal-meta">
+    <p><strong>Description:</strong> {{ goal.description|default:"(No description)" }}</p>
 
-  {% if goal.target_date %}
-    <p><strong>Target date:</strong> {{ goal.target_date }}</p>
-  {% endif %}
+    {% if goal.target_date %}
+      <p><strong>Target Date:</strong> {{ goal.target_date }}</p>
+    {% endif %}
 
-  {% if goal.is_standard %}
-    <h4>Standard Goal</h4>
-    <p><strong>Category:</strong> {{ goal.standard_goal.get_category_display }}</p>
-    <p><strong>Tracked Metrics:</strong>
-      {{ goal.standard_goal.metrics|join:", " }}
-    </p>
-  {% endif %}
-
-  <hr>
-
-  <h3>Progress</h3>
-  <div>
-    <!-- Placeholder: You can replace this with a progress bar later -->
-    <p><em>Progress tracking coming soon...</em></p>
+    {% if goal.is_standard %}
+      <p><strong>Standard Goal:</strong> {{ goal.standard_goal.get_category_display }}</p>
+      <p><strong>Tracked Metrics:</strong> {{ goal.standard_goal.metrics|join:", " }}</p>
+    {% endif %}
   </div>
 
   <hr>
 
-  <h3>Practice Sessions</h3>
-
-  {% if sessions %}
-    <ul>
-      {% for session in sessions %}
-        <li>
-          {{ session.date|date:"Y-m-d H:i" }} –
-          {{ session.duration }} min –
-          Tempo: {{ session.tempo|default:"-" }},
-          Mistakes: {{ session.mistakes|default:"-" }},
-          Accuracy: {{ session.accuracy|default:"-" }}%
-          <br>
-          Notes: {{ session.notes|default:"(none)" }}
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No practice sessions logged for this goal yet.</p>
-  {% endif %}
+  <section>
+    <h2>Progress</h2>
+    <p class="text-muted"><em>Progress tracking coming soon...</em></p>
+    <!-- Later we can replace this with a progress bar -->
+  </section>
 
   <hr>
 
-  <a href="{% url 'create_session_for_goal' goal.id %}" class="btn btn-primary">➕ Log Practice Session</a>
-  <br><br>
-  <a href="{% url 'dashboard' %}">← Back to Dashboard</a>
+  <section>
+    <h2>Practice Sessions</h2>
+
+    {% if sessions %}
+      <ul>
+        {% for session in sessions %}
+          <li>
+            <strong>{{ session.date|date:"Y-m-d H:i" }}</strong> — {{ session.duration }} min<br>
+            Tempo: {{ session.tempo|default:"-" }},
+            Mistakes: {{ session.mistakes|default:"-" }},
+            Accuracy: {{ session.accuracy|default:"-" }}%
+            <br>
+            <em>Notes:</em> {{ session.notes|default:"(none)" }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-muted">No practice sessions logged for this goal yet.</p>
+    {% endif %}
+  </section>
+
+  <div style="margin-top: 2rem;">
+    <a href="{% url 'create_session_for_goal' goal.id %}" class="button">➕ Log Practice Session</a>
+  </div>
+
+  <div style="margin-top: 1rem;">
+    <a href="{% url 'dashboard' %}">← Back to Dashboard</a>
+  </div>
+</div>
 {% endblock %}

@@ -7,21 +7,33 @@ class GoalForm(forms.ModelForm):
         model = Goal
         fields = ['title', 'description', 'standard_goal', 'target_date']
 
-    # For custom goals: allow entry of selected metric values
-    tempo = forms.IntegerField(required=False)
-    mistakes = forms.IntegerField(required=False)
-    duration = forms.IntegerField(required=False)
+    # Custom goal metric fields
+    starting_tempo = forms.IntegerField(required=False, label="Starting Tempo")
+    target_tempo = forms.IntegerField(required=False, label="Target Tempo")
+    duration = forms.IntegerField(required=False, label="Target Duration (minutes)")
+    mistakes = forms.IntegerField(required=False, label="Max Mistakes per Repetition")
 
     def clean(self):
         cleaned_data = super().clean()
 
-        # If it's a custom goal, gather the metrics
         if not cleaned_data.get('standard_goal'):
             metrics = {}
-            for field in ['tempo', 'mistakes', 'duration']:
-                val = cleaned_data.get(field)
-                if val is not None:
-                    metrics[field] = val
+
+            # Handle tempo range
+            start = cleaned_data.get('starting_tempo')
+            target = cleaned_data.get('target_tempo')
+            if start is not None or target is not None:
+                metrics['tempo'] = {
+                    'start': start or 0,
+                    'target': target or 0
+                }
+
+            # Other metrics
+            if cleaned_data.get('duration') is not None:
+                metrics['duration'] = cleaned_data['duration']
+            if cleaned_data.get('mistakes') is not None:
+                metrics['mistakes'] = cleaned_data['mistakes']
+
             cleaned_data['metrics'] = metrics
 
         return cleaned_data

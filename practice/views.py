@@ -57,6 +57,31 @@ def session_create(request):
         if form.is_valid():
             session = form.save(commit=False)
             session.user = request.user
+
+            # Calculate session progress if goal and metrics are present
+            if session.goal and session.goal.metrics:
+                metrics = session.goal.metrics
+
+                progress = {}
+
+                # Tempo: check improvement toward target
+                if 'tempo' in metrics and isinstance(metrics['tempo'], dict):
+                    achieved = session.tempo
+                    start = metrics['tempo'].get('start') or 0
+                    target = metrics['tempo'].get('target') or 0
+                    if achieved and target > start:
+                        progress['tempo'] = min(100, round((achieved - start) / (target - start) * 100, 2))
+
+                # Duration: cumulative — handled in dashboard instead
+                # Mistakes: inverse percentage
+                if 'mistakes' in metrics and session.mistakes is not None:
+                    max_allowed = metrics['mistakes']
+                    progress['mistakes'] = max(0, 100 - round((session.mistakes / (max_allowed + 1)) * 100, 2))  # +1 to avoid div by 0
+
+                # Optional: save one unified progress % (e.g. average of all)
+                if progress:
+                    session.progress_percent = round(sum(progress.values()) / len(progress), 2)
+
             session.save()
             return redirect('dashboard')
     else:
@@ -74,6 +99,26 @@ def session_create_for_goal(request, goal_id):
             session = form.save(commit=False)
             session.user = request.user
             session.goal = goal
+
+            metrics = goal.get_metrics()
+            total_progress = 0
+            count = 0
+
+            for metric in metrics:
+                session_value = getattr(session, metric, None)
+                target_value = goal.get_target_for(metric)
+
+                if session_value is not None and target_value:
+                    if metric == 'mistakes':
+                        # Lower is better — invert logic
+                        progress = max(0, 100 - ((session_value / target_value) * 100))
+                    else:
+                        progress = min(100, (session_value / target_value) * 100)
+                    total_progress += progress
+                    count += 1
+
+            session.progress_percent = round(total_progress / count, 2) if count else None
+
             session.save()
             return redirect('goal_detail', pk=goal.id)
     else:

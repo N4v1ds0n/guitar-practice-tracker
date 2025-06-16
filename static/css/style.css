@@ -216,3 +216,24 @@ ul li {
 .btn-link:hover {
     background-color: var(--maroon);
 }
+
+/* Goal Design */
+
+.text-muted {
+  color: #555;
+  font-style: italic;
+}
+
+.button {
+  display: inline-block;
+  background-color: var(--auburn);
+  color: var(--text-light);
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: var(--maroon);
+}
