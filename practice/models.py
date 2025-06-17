@@ -1,170 +1,117 @@
 from django.db import models
-from django.db.models import JSONField
 from django.conf import settings
 from django.utils import timezone
 from accounts.models import CustomUser as User
-from collections import defaultdict
-from statistics import mean
 
-# Create your models here.
-
-# Model for standard goals that users can set but not adjust
+GOAL_TYPE_CHOICES = [
+    ('technique', 'Technique'),
+    ('repertoire', 'Repertoire'),
+    ('routine', 'Routine'),
+    ('custom', 'Custom'),
+]
 
 
 class StandardGoalDefinition(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField()
-    metrics = models.JSONField(
-        help_text='''List of metrics this goal tracks,
-        e.g. ['tempo', 'mistakes', 'duration']'''
-        )
-
-    CATEGORY_CHOICES = [
-        ('technique', 'Technique'),
-        ('theory', 'Theory'),
-        ('ear_training', 'Ear Training'),
-        ('repertoire', 'Repertoire'),
-        ('other', 'Other'),
-    ]
-    category = models.CharField(
-        max_length=50, choices=CATEGORY_CHOICES, default='other')
+    goal_type = models.CharField(max_length=20, choices=GOAL_TYPE_CHOICES)
 
     def __str__(self):
         return self.name
 
 
-# Model for Goals that users can set and track
-
 class Goal(models.Model):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE, related_name='goals'
-    )
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='goals')
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
-    standard_goal = models.ForeignKey(
-        StandardGoalDefinition,
-        on_delete=models.SET_NULL, null=True, blank=True
-    )
+    goal_type = models.CharField(max_length=20, choices=GOAL_TYPE_CHOICES, default='custom')
+    standard_goal = models.ForeignKey(StandardGoalDefinition, on_delete=models.SET_NULL, null=True, blank=True)
+
+    # Only for technique & custom
+    target_tempo = models.PositiveIntegerField(null=True, blank=True)
+    target_accuracy = models.FloatField(null=True, blank=True)
+    target_duration = models.PositiveIntegerField(null=True, blank=True)  # in minutes
+
+    # Only for routine
+    routine_target_days = models.PositiveIntegerField(null=True, blank=True)  # e.g., 7 for perfect week
+
     created_at = models.DateTimeField(auto_now_add=True)
     target_date = models.DateField(null=True, blank=True)
-
-    # Metrics config
-    metrics = JSONField(
-        null=True,
-        blank=True,
-        help_text='Dict of target values for selected metrics (e.g. {"tempo": 120, "mistakes": 0, "duration": 300})'
-    )
-    start_tempo = models.PositiveIntegerField(null=True, blank=True)
-
-    def is_standard(self):
-        return self.standard_goal is not None
-
-    def get_metrics(self):
-        if self.is_standard():
-            return self.standard_goal.metrics
-        return list(self.metrics.keys()) if self.metrics else []
-
-    def get_target_for(self, metric):
-        if self.is_standard():
-            return self.standard_goal.metrics.get(metric)
-        return self.metrics.get(metric) if self.metrics else None
-
-    def get_progress(self):
-        """
-        Returns progress for each tracked metric as a percentage.
-        """
-        sessions = self.sessions.all()
-        progress = {}
-
-        for metric in self.get_metrics():
-            target = self.get_target_for(metric)
-            if not target:
-                progress[metric] = 0
-                continue
-
-            if metric == "tempo":
-                latest = max([s.tempo for s in sessions if s.tempo], default=self.start_tempo or 0)
-                base = self.start_tempo or 0
-                progress[metric] = min(100, round(((latest - base) / (target - base)) * 100, 2)) if target > base else 0
-
-            elif metric == "duration":
-                total = sum([s.duration for s in sessions])
-                progress[metric] = min(100, round((total / target) * 100, 2))
-
-            elif metric == "mistakes":
-                if not sessions:
-                    progress[metric] = 0
-                else:
-                    success_sessions = [s for s in sessions if s.mistakes is not None and s.mistakes <= target]
-                    progress[metric] = round((len(success_sessions) / len(sessions)) * 100, 2)
-
-            else:
-                # Generic metric fallback
-                total = sum([getattr(s, metric, 0) or 0 for s in sessions])
-                progress[metric] = min(100, round((total / target) * 100, 2))
-
-        return progress
-
-    def get_overall_progress(self):
-
-        if not self.metrics:
-            return 0
-
-        sessions = self.sessions.all()  # assumes related_name='practice_sessions'
-        if not sessions.exists():
-            return 0
-
-        metric_progress = {}
-        for metric, target_value in self.metrics.items():
-            # Collect non-null values from sessions
-            values = [getattr(session, metric, None) for session in sessions if getattr(session, metric, None) is not None]
-            if not values:
-                continue
-
-            if metric == 'mistakes':
-                # Lower is better
-                current_value = min(values)
-                progress = max(0, 1 - (current_value / target_value))  # e.g., from 5 to 0 mistakes
-            else:
-                # Higher is better
-                current_value = max(values)
-                progress = min(1, current_value / target_value)
-
-            metric_progress[metric] = round(progress * 100, 1)
-
-        if not metric_progress:
-            return 0
-
-        # Return average of all tracked metric progress percentages
-        return round(sum(metric_progress.values()) / len(metric_progress), 1)
-
-    def is_complete(self):
-        """Returns True if overall progress has reached or exceeded 100%."""
-        return self.get_overall_progress() >= 100
 
     def __str__(self):
         return self.title
 
-# Model for a practice session
+    def is_complete(self):
+        if self.goal_type == 'routine':
+            return self.check_routine_completion()
+        elif self.goal_type == 'repertoire':
+            return False  # Manual completion
+        return self.get_overall_progress() >= 100
+
+    def get_overall_progress(self):
+        sessions = self.sessions.all()
+        if not sessions.exists():
+            return 0
+
+        progress = []
+
+        if self.target_tempo:
+            max_tempo = max([s.tempo or 0 for s in sessions])
+            progress.append(min(1, max_tempo / self.target_tempo))
+
+        if self.target_accuracy:
+            max_acc = max([s.accuracy or 0 for s in sessions])
+            progress.append(min(1, max_acc / self.target_accuracy))
+
+        if self.target_duration:
+            total_duration = sum([s.duration or 0 for s in sessions])
+            progress.append(min(1, total_duration / self.target_duration))
+
+        if not progress:
+            return 0
+
+        return round(sum(progress) / len(progress) * 100, 1)
+
+    def check_routine_completion(self):
+        sessions = self.sessions.filter(duration__gte=15).order_by('date')
+
+        if not sessions.exists() or not self.routine_target_days:
+            return False
+
+        streak = 1
+        for i in range(1, len(sessions)):
+            delta = (sessions[i].date.date() - sessions[i - 1].date.date()).days
+            if delta == 1:
+                streak += 1
+            elif delta > 1:
+                streak = 1
+
+            if streak >= self.routine_target_days:
+                return True
+
+        return False
+
+
+class StandardPracticeSession(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField()
+    goal_type = models.CharField(max_length=20, choices=GOAL_TYPE_CHOICES, default='custom')
+
+    def __str__(self):
+        return self.name
 
 
 class PracticeSession(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    goal = models.ForeignKey(
-                            Goal,
-                            on_delete=models.SET_NULL,
-                            null=True,
-                            blank=True,
-                            related_name='sessions'
-        )
+    goal = models.ForeignKey(Goal, on_delete=models.SET_NULL, null=True, blank=True, related_name='sessions')
     date = models.DateTimeField(default=timezone.now)
-    duration = models.PositiveIntegerField(help_text="Duration in minutes")
+
+    # Core attributes used in custom/technical goals
+    duration = models.PositiveIntegerField(help_text="Duration in minutes", null=True, blank=True)
     tempo = models.PositiveIntegerField(null=True, blank=True)
-    mistakes = models.PositiveIntegerField(null=True, blank=True)
-    accuracy = models.FloatField(null=True, blank=True)
+    accuracy = models.FloatField(null=True, blank=True, help_text="Accuracy as percentage (0–100)")
+
     notes = models.TextField(blank=True)
 
     def __str__(self):
-        return f"Session on {self.date.date()} for goal '{self.goal}'"
-
+        return f"Session on {self.date.date()} for goal '{self.goal or 'Unlinked'}'"

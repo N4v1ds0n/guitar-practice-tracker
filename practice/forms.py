@@ -3,81 +3,79 @@ from .models import Goal, PracticeSession
 
 
 class GoalForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)  # Extract user if passed
+        super().__init__(*args, **kwargs)
+
     class Meta:
         model = Goal
-        fields = ['title', 'description', 'standard_goal', 'target_date']
+        fields = [
+            'title', 'description', 'goal_type', 'standard_goal',
+            'target_tempo', 'target_accuracy', 'target_duration',
+            'routine_target_days', 'target_date'
+        ]
         widgets = {
             'target_date': forms.DateInput(attrs={'type': 'date'}),
         }
 
-    # Custom goal metric fields
-    starting_tempo = forms.IntegerField(required=False, label="Starting Tempo")
-    target_tempo = forms.IntegerField(required=False, label="Target Tempo")
-    duration = forms.IntegerField(required=False, label="Target Duration (minutes)")
-    mistakes = forms.IntegerField(required=False, label="Max Mistakes per Repetition")
-
     def clean(self):
         cleaned_data = super().clean()
+        goal_type = cleaned_data.get('goal_type')
 
-        if not cleaned_data.get('standard_goal'):
-            metrics = {}
+        # Routine goal check
+        if goal_type == 'routine':
+            if not cleaned_data.get('routine_target_days'):
+                self.add_error('routine_target_days', 'This field is required for routine goals.')
 
-            # Handle tempo range
-            start = cleaned_data.get('starting_tempo')
-            target = cleaned_data.get('target_tempo')
-            if start is not None or target is not None:
-                metrics['tempo'] = {
-                    'start': start or 0,
-                    'target': target or 0
-                }
+            # Routine should NOT use tempo/accuracy/duration
+            for field in ['target_tempo', 'target_accuracy', 'target_duration']:
+                if cleaned_data.get(field):
+                    self.add_error(field, f"{field.replace('_', ' ').capitalize()} is not allowed for routine goals.")
 
-            # Other metrics
-            if cleaned_data.get('duration') is not None:
-                metrics['duration'] = cleaned_data['duration']
-            if cleaned_data.get('mistakes') is not None:
-                metrics['mistakes'] = cleaned_data['mistakes']
+        # Technical or custom goal check
+        elif goal_type in ['technique', 'custom']:
+            required_fields = ['target_tempo', 'target_accuracy', 'target_duration']
+            missing = [f for f in required_fields if not cleaned_data.get(f)]
+            if missing:
+                raise forms.ValidationError(
+                    f"Fields required for {goal_type} goals: {', '.join(missing)}"
+                )
 
-            cleaned_data['metrics'] = metrics
+        # Repertoire goals: no numeric attributes
+        elif goal_type == 'repertoire':
+            for field in ['target_tempo', 'target_accuracy', 'target_duration', 'routine_target_days']:
+                if cleaned_data.get(field):
+                    self.add_error(field, f"{field.replace('_', ' ').capitalize()} is not allowed for repertoire goals.")
 
         return cleaned_data
-    
-    def clean_metrics(self):
-        metrics = self.cleaned_data['metrics']
-        if any(isinstance(v, dict) for v in metrics.values()):
-            raise forms.ValidationError("Metric values must be flat numbers, not dictionaries.")
-        return metrics
-
-    def save(self, commit=True):
-        goal = super().save(commit=False)
-        if not goal.standard_goal:
-            goal.metrics = self.cleaned_data.get('metrics', {})
-        if commit:
-            goal.save()
-        return goal
 
 
 class PracticeSessionForm(forms.ModelForm):
     class Meta:
         model = PracticeSession
-        fields = ['goal', 'duration', 'tempo', 'mistakes', 'accuracy', 'notes']
+        fields = ['goal', 'date', 'duration', 'tempo', 'accuracy', 'notes']
+        widgets = {
+            'date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
+
         if user:
             self.fields['goal'].queryset = Goal.objects.filter(user=user)
 
-        # If editing, restrict fields based on goal
-        goal = self.initial.get('goal') or self.data.get('goal')
-        if goal:
+        # Try to fetch the goal object from initial or form data
+        goal_instance = None
+        raw_goal = self.initial.get('goal') or self.data.get('goal')
+        if raw_goal:
             try:
-                if isinstance(goal, Goal):
-                    goal_obj = goal
-                else:
-                    goal_obj = Goal.objects.get(id=goal)
-                allowed_metrics = goal_obj.get_metrics().keys()
-                for field in ['tempo', 'mistakes', 'duration', 'accuracy']:
-                    if field not in allowed_metrics:
-                        self.fields.pop(field, None)
-            except:
+                goal_instance = raw_goal if isinstance(raw_goal, Goal) else Goal.objects.get(pk=raw_goal)
+            except Goal.DoesNotExist:
                 pass
+
+        # Adjust fields based on goal type
+        if goal_instance:
+            if goal_instance.goal_type in ['repertoire', 'routine']:
+                self.fields.pop('tempo', None)
+                self.fields.pop('accuracy', None)
