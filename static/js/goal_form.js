@@ -28,15 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
       targetTempo.classList.remove("hidden");
       targetAccuracy.classList.remove("hidden");
       targetDuration.classList.remove("hidden");
-    } else if (value === "technique") {
-      console.log('Technique goal selected');
+    } else  {
+      console.log('Standard goal selected');
       standardGoals.classList.remove("hidden");
-    } else if (value === "repertoire") {
-      console.log('Repertoire goal selected');
-      standardGoals.classList.remove("hidden");
-    } else if (value === "routine") {
-      console.log('Routine goal selected');
-      standardGoals.classList.remove("hidden");
+      targetTempo.classList.remove("hidden");
+      targetAccuracy.classList.remove("hidden");
+      targetDuration.classList.remove("hidden");
     }
   }
 
