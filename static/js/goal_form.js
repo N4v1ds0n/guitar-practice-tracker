@@ -1,41 +1,48 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const goalTypeField = document.querySelector("#id_goal_type");
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Goal form script loaded");
+  const goalTypeField = document.querySelector("#id_goal_type");
+  const standardGoals = document.querySelector("#standard-goal");
+  const goalTitle = document.querySelector("#goal-title");
+  const goalDescription = document.querySelector("#goal-description");
+  const targetTempo = document.querySelector("#target-tempo");
+  const targetAccuracy = document.querySelector("#target-accuracy");
+  const targetDuration = document.querySelector("#target-duration");
+  const routineTargetDays = document.querySelector("#routine-target-days");
 
-    // Mapping goal types to the field classes they need
-    const fieldGroups = {
-        'routine': ['.field-routine-target-days'],
-        'technical': ['.field-target-tempo', '.field-target-accuracy', '.field-target-duration'],
-        'custom': ['.field-target-tempo', '.field-target-accuracy', '.field-target-duration'],
-        'repertoire': []
-    };
+  function updateFormVisibility() {
+    const value = goalTypeField.value;
 
-    function updateFieldVisibility() {
-        const selectedType = goalTypeField.value;
+    // Hide all by default
+    standardGoals.classList.add("hidden");
+    goalTitle.classList.add("hidden");
+    goalDescription.classList.add("hidden");
+    targetTempo.classList.add("hidden");
+    targetAccuracy.classList.add("hidden");
+    targetDuration.classList.add("hidden");
+    routineTargetDays.classList.add("hidden");
 
-        // All conditional fields
-        const allSelectors = ['.field-target-tempo', '.field-target-accuracy', '.field-target-duration', '.field-routine-target-days'];
-        
-        // Hide all first
-        allSelectors.forEach(selector => {
-            const field = document.querySelector(selector);
-            if (field) {
-                field.closest('p').style.display = 'none';
-            }
-        });
-
-        // Show the ones needed for this type
-        const visibleFields = fieldGroups[selectedType] || [];
-        visibleFields.forEach(selector => {
-            const field = document.querySelector(selector);
-            if (field) {
-                field.closest('p').style.display = '';
-            }
-        });
+    if (value === "custom") {
+      console.log('Custom goal selected');
+      goalTitle.classList.remove("hidden");
+      goalDescription.classList.remove("hidden");
+      targetTempo.classList.remove("hidden");
+      targetAccuracy.classList.remove("hidden");
+      targetDuration.classList.remove("hidden");
+    } else if (value === "technique") {
+      console.log('Technique goal selected');
+      standardGoals.classList.remove("hidden");
+    } else if (value === "repertoire") {
+      console.log('Repertoire goal selected');
+      standardGoals.classList.remove("hidden");
+    } else if (value === "routine") {
+      console.log('Routine goal selected');
+      standardGoals.classList.remove("hidden");
     }
+  }
 
-    // Initial call
-    updateFieldVisibility();
+  // Attach change event to the goal type field
+  goalTypeField.addEventListener("change", updateFormVisibility);
 
-    // Change handler
-    goalTypeField.addEventListener("change", updateFieldVisibility);
+  // Run on initial load
+  updateFormVisibility();
 });

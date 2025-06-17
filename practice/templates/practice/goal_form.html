@@ -1,27 +1,36 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Create Goal{% endblock %}
 
 {% block content %}
   <h2>Create a New Goal</h2>
-  <form method="post">
+  <form method="post" id="goal-form">
     {% csrf_token %}
-    {{ form.as_p }}
 
-    {% if form.errors %}
-        <ul class="errorlist">
-            {% for field in form %}
-                {% for error in field.errors %}
-                    <li>{{ field.label }}: {{ error }}</li>
-                {% endfor %}
-            {% endfor %}
-            {% for error in form.non_field_errors %}
-                <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
+    <p>{{ form.goal_type.label_tag }} {{ form.goal_type }}</p>
+    <p id="goal-title">{{ form.title.label_tag }} {{ form.title }}</p>
+    <p id="goal-description">{{ form.description.label_tag }} {{ form.description }}</p>
+    <p id="standard-goal">{{ form.standard_goal.label_tag }} {{ form.standard_goal }}</p>
+
+    <p class="field-target-tempo" id="target-tempo">{{ form.target_tempo.label_tag }} {{ form.target_tempo }}</p>
+    {% if form.target_tempo.errors %}
+        <span class="error">{{ form.target_tempo.errors.0 }}</span>
     {% endif %}
+    <p class="field-target-accuracy" id="target-accuracy">{{ form.target_accuracy.label_tag }} {{ form.target_accuracy }}</p>
+    {% if form.target_accuracy.errors %}
+        <span class="error">{{ form.target_accuracy.errors.0 }}</span>
+    {% endif %}
+    <p class="field-target-duration" id="target-duration">{{ form.target_duration.label_tag }} {{ form.target_duration }}</p>
+    {% if form.target_duration.errors %}
+        <span class="error">{{ form.target_duration.errors.0 }}</span>
+    {% endif %}
+
+    <p class="field-routine-target-days" id="routine-target-days">{{ form.routine_target_days.label_tag }} {{ form.routine_target_days }}</p>
+
+    <p>{{ form.target_date.label_tag }} {{ form.target_date }}</p>
 
     <button type="submit">Save Goal</button>
   </form>
   <a href="{% url 'dashboard' %}">← Back to Goals</a>
-  <script src="../../../static/js/goal_form.js"></script>
+  <script src="{% static 'js/goal_form.js' %}"></script>
 {% endblock %}

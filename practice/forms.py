@@ -4,8 +4,14 @@ from .models import Goal, PracticeSession
 
 class GoalForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)  # Extract user if passed
+        self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
+
+        # Make all conditional fields non-required
+        self.fields['target_tempo'].required = False
+        self.fields['target_accuracy'].required = False
+        self.fields['target_duration'].required = False
+        self.fields['routine_target_days'].required = False
 
     class Meta:
         model = Goal
