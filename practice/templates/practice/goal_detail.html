@@ -58,8 +58,7 @@
         {% for session in sessions %}
           <li>
             <strong>{{ session.date|date:"Y-m-d H:i" }}</strong> — {{ session.duration }} min<br>
-            Tempo: {{ session.tempo|default:"-" }},
-            Mistakes: {{ session.mistakes|default:"-" }},
+            Tempo: {{ session.tempo|default:"-" }} bpm,
             Accuracy: {{ session.accuracy|default:"-" }}%
             <br>
             <em>Notes:</em> {{ session.notes|default:"(none)" }}

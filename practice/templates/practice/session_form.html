@@ -1,12 +1,28 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block title %}Log Practice Session{% endblock %}
 
 {% block content %}
   <h2>Log a Practice Session</h2>
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Session</button>
+    <p class = 'goal'>{{ form.goal.label_tag }} {{ form.goal }}</p>
+    <p class = 'date'>{{ form.date.label_tag }} {{ form.date }}</p>
+    <p>The following fields are for your own statistics and progress tracking. Use them, as you see fit for any goals they are linked to or just for your personal stats.</p>
+
+    <p class = 'stat-input' id="tempo-wrapper">{{ form.tempo.label_tag }} {{ form.tempo }}<span>bpm</span></p>
+    <p class = 'stat-input' id="accuracy-wrapper">{{ form.accuracy.label_tag }} {{ form.accuracy }}</p>
+    <p class = 'stat-input'>{{ form.duration.label_tag }} {{ form.duration }}</p>
+    <pclass = 'notes'>{{ form.notes.label_tag }} {{ form.notes }}</p>
+    <button class = 'button' type="submit">Save Session</button>
   </form>
   <a href="{% url 'dashboard' %}">← Back to Dashboard</a>
+  
+  {{ goal_types|json_script:"goal-types" }}
+  <script src="{% static 'js/session_form.js' %}"></script>
+  
+  <style>
+    .hidden { display: none; }
+  </style>
 {% endblock %}

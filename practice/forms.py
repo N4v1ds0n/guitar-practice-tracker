@@ -1,5 +1,5 @@
 from django import forms
-from .models import Goal, PracticeSession, StandardGoalDefinition
+from .models import Goal, PracticeSession
 
 
 class GoalForm(forms.ModelForm):
@@ -12,13 +12,19 @@ class GoalForm(forms.ModelForm):
         self.fields['target_accuracy'].required = False
         self.fields['target_duration'].required = False
         self.fields['routine_target_days'].required = False
+        self.fields['goal'].widget.attrs.update({'class': 'goal-select'})
+
+        self.fields['goal'].widget.choices = [
+            (goal.pk, f"{goal.title}") for goal in Goal.objects.filter(user=user)
+        ]
+        self.goal_types = {str(goal.pk): goal.goal_type for goal in Goal.objects.filter(user=user)}
 
     class Meta:
         model = Goal
         fields = [
             'title', 'description', 'goal_type', 'standard_goal',
             'target_tempo', 'target_accuracy', 'target_duration',
-            'routine_target_days', 'target_date'
+            'routine_target_days', 'target_date',
         ]
         widgets = {
             'target_date': forms.DateInput(attrs={'type': 'date'}),

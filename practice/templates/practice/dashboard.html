@@ -27,6 +27,16 @@
           <li class="item-card">No goals yet.</li>
         {% endfor %}
       </ul>
+      <!-- Pagination Controls -->
+      <div class="pagination">
+        {% if goals.has_previous %}
+          <a href="?goals_page={{ goals.previous_page_number }}&sessions_page={{ sessions.number }}">Previous</a>
+        {% endif %}
+        Page {{ goals.number }} of {{ goals.paginator.num_pages }}
+        {% if goals.has_next %}
+          <a href="?goals_page={{ goals.next_page_number }}&sessions_page={{ sessions.number }}">Next</a>
+        {% endif %}
+      </div>
     </section>
 
     <!-- Practice Sessions Section -->

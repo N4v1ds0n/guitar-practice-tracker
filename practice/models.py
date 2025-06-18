@@ -92,15 +92,6 @@ class Goal(models.Model):
         return False
 
 
-class StandardPracticeSession(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    description = models.TextField()
-    goal_type = models.CharField(max_length=20, choices=GOAL_TYPE_CHOICES, default='custom')
-
-    def __str__(self):
-        return self.name
-
-
 class PracticeSession(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     goal = models.ForeignKey(Goal, on_delete=models.SET_NULL, null=True, blank=True, related_name='sessions')
