@@ -11,9 +11,9 @@
     <p class = 'date'>{{ form.date.label_tag }} {{ form.date }}</p>
     <p>The following fields are for your own statistics and progress tracking. Use them, as you see fit for any goals they are linked to or just for your personal stats.</p>
 
-    <p class = 'stat-input' id="tempo-wrapper">{{ form.tempo.label_tag }} {{ form.tempo }}<span>bpm</span></p>
-    <p class = 'stat-input' id="accuracy-wrapper">{{ form.accuracy.label_tag }} {{ form.accuracy }}</p>
-    <p class = 'stat-input'>{{ form.duration.label_tag }} {{ form.duration }}</p>
+    <p class = 'stat-input' id="tempo-wrapper">{{ form.tempo.label_tag }} {{ form.tempo }} bpm</p>
+    <p class = 'stat-input' id="accuracy-wrapper">{{ form.accuracy.label_tag }} {{ form.accuracy }}%</p>
+    <p class = 'stat-input'>{{ form.duration.label_tag }} {{ form.duration }} min</p>
     <pclass = 'notes'>{{ form.notes.label_tag }} {{ form.notes }}</p>
     <button class = 'button' type="submit">Save Session</button>
   </form>

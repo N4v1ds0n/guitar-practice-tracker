@@ -26,6 +26,7 @@ class Goal(models.Model):
     description = models.TextField(blank=True)
     goal_type = models.CharField(max_length=20, choices=GOAL_TYPE_CHOICES, default='custom')
     standard_goal = models.ForeignKey(StandardGoalDefinition, on_delete=models.SET_NULL, null=True, blank=True)
+    goal = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name='subgoals')
 
     # Only for technique & custom
     target_tempo = models.PositiveIntegerField(null=True, blank=True)

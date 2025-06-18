@@ -20,15 +20,15 @@
     <p id="goal-title">{{ form.title.label_tag }} {{ form.title }}</p>
     <p id="goal-description">{{ form.description.label_tag }} {{ form.description }}</p>
     
-    <p class="field-target-tempo" id="target-tempo">{{ form.target_tempo.label_tag }} {{ form.target_tempo }}</p>
+    <p class="field-target-tempo" id="target-tempo">{{ form.target_tempo.label_tag }} {{ form.target_tempo }} bpm</p>
     {% if form.target_tempo.errors %}
         <span class="error">{{ form.target_tempo.errors.0 }}</span>
     {% endif %}
-    <p class="field-target-accuracy" id="target-accuracy">{{ form.target_accuracy.label_tag }} {{ form.target_accuracy }}</p>
+    <p class="field-target-accuracy" id="target-accuracy">{{ form.target_accuracy.label_tag }} {{ form.target_accuracy }}%</p>
     {% if form.target_accuracy.errors %}
         <span class="error">{{ form.target_accuracy.errors.0 }}</span>
     {% endif %}
-    <p class="field-target-duration" id="target-duration">{{ form.target_duration.label_tag }} {{ form.target_duration }}</p>
+    <p class="field-target-duration" id="target-duration">{{ form.target_duration.label_tag }} {{ form.target_duration }} min</p>
     {% if form.target_duration.errors %}
         <span class="error">{{ form.target_duration.errors.0 }}</span>
     {% endif %}

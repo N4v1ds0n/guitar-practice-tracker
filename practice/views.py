@@ -8,6 +8,10 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
+def about(request):
+    return render(request,'practice/about.html')
+
+
 @login_required
 def dashboard(request):
     goals_queryset = Goal.objects.filter(user=request.user).order_by('-created_at')

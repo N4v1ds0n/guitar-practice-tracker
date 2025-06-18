@@ -15,16 +15,16 @@ class GoalForm(forms.ModelForm):
         self.fields['goal'].widget.attrs.update({'class': 'goal-select'})
 
         self.fields['goal'].widget.choices = [
-            (goal.pk, f"{goal.title}") for goal in Goal.objects.filter(user=user)
+            (goal.pk, f"{goal.title}") for goal in Goal.objects.filter(user=self.user)
         ]
-        self.goal_types = {str(goal.pk): goal.goal_type for goal in Goal.objects.filter(user=user)}
+        self.goal_types = {str(goal.pk): goal.goal_type for goal in Goal.objects.filter(user=self.user)}
 
     class Meta:
         model = Goal
         fields = [
             'title', 'description', 'goal_type', 'standard_goal',
             'target_tempo', 'target_accuracy', 'target_duration',
-            'routine_target_days', 'target_date',
+            'routine_target_days', 'target_date', 'goal',
         ]
         widgets = {
             'target_date': forms.DateInput(attrs={'type': 'date'}),
