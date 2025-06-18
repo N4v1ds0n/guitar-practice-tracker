@@ -10,4 +10,6 @@ urlpatterns = [
     path('session/<int:pk>/', views.session_detail, name='session_detail'),
     path('goal/<int:goal_id>/session/new/', views.session_create_for_goal, name='create_session_for_goal'),
     path('api/standard-goal/', views.get_standard_goal_description, name='standard_goal_description'),
+    path('goal/<int:pk>/delete/', views.goal_delete, name='goal_delete'),
+    path('session/<int:pk>/delete/', views.session_delete, name='session_delete'),
 ]

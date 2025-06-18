@@ -16,4 +16,10 @@
     {{ password_form.as_p }}
     <button type="submit" name="change_password">Change Password</button>
   </form>
+  <form action="{% url 'delete_account' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="danger" onclick="return confirm('This will delete your account and all data. Proceed?')">
+        Delete My Account
+    </button>
+</form>
 {% endblock %}

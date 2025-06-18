@@ -14,4 +14,5 @@ urlpatterns = [
         views.custom_logout, name='logout'
         ),
     path('profile/', views.profile, name='profile'),
+    path('account/delete/', views.delete_account, name='delete_account'),
 ]

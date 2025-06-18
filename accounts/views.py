@@ -60,3 +60,14 @@ def profile(request):
         'profile_form': profile_form,
         'password_form': password_form,
     })
+
+@login_required
+def delete_account(request):
+    if request.method == "POST":
+        user = request.user
+        username = user.username
+        logout(request)
+        user.delete()
+        messages.success(request, f'Account "{username}" has been deleted.')
+        return redirect('home')
+    return redirect('dashboard')  # fallback if GET

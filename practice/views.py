@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from .models import Goal, PracticeSession, StandardGoalDefinition
 from .forms import GoalForm, PracticeSessionForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 
@@ -68,6 +69,14 @@ def goal_create(request):
 
 
 @login_required
+def goal_delete(request, pk):
+    goal = get_object_or_404(Goal, pk=pk, user=request.user)
+    goal.delete()
+    messages.success(request, f'Goal "{goal.title}" was deleted.')
+    return redirect('dashboard')
+
+
+@login_required
 def session_create(request):
     goal_types = {str(goal.id): goal.goal_type for goal in Goal.objects.filter(user=request.user)}
     if request.method == 'POST':
@@ -110,6 +119,14 @@ def session_create_for_goal(request, goal_id):
 def session_detail(request, pk):
     session = get_object_or_404(PracticeSession, pk=pk, user=request.user)
     return render(request, 'practice/session_detail.html', {'session': session})
+
+
+@login_required
+def session_delete(request, pk):
+    session = get_object_or_404(PracticeSession, pk=pk, user=request.user)
+    session.delete()
+    messages.success(request, 'Practice session deleted.')
+    return redirect('dashboard')
 
 
 @login_required
