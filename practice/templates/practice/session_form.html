@@ -5,7 +5,7 @@
 
 {% block content %}
   <div class="session-form-container">
-    <h2>Log a Practice Session</h2>
+    <h2>{% if edit_mode %}Edit{% else %}Log{% endif %} Practice Session</h2>
     <form method="post">
       {% csrf_token %}
       <p class = 'goal'>{{ form.goal.label_tag }} {{ form.goal }}</p>

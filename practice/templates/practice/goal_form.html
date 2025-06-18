@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="goal_form-container">
-  <h2>Create a New Goal</h2>
+  <h2>{% if edit_mode %}Edit{% else %}Create{% endif %} Goal</h2>
   <form method="post" id="goal-form">
     {% csrf_token %}
 

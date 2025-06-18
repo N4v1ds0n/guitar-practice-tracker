@@ -47,6 +47,8 @@
     {% endwith %}
   </section>
 
+  <a href="{% url 'session_edit' session.pk %}" class="button">✏️ Edit Session</a>
+
   <form action="{% url 'session_delete' session.pk %}" method="post" style="display:inline;">
     {% csrf_token %}
     <button type="submit" class="button" onclick="return confirm('Delete this session?')">Delete</button>

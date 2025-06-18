@@ -69,6 +69,21 @@ def goal_create(request):
 
 
 @login_required
+def goal_edit(request, pk):
+    goal = get_object_or_404(Goal, pk=pk, user=request.user)
+    if request.method == 'POST':
+        form = GoalForm(request.POST, instance=goal, user=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Goal updated successfully.")
+            return redirect('goal_detail', pk=goal.pk)
+    else:
+        form = GoalForm(instance=goal, user=request.user)
+    return render(request, 'practice/goal_form.html', {'form': form, 'edit_mode': True})
+
+
+
+@login_required
 def goal_delete(request, pk):
     goal = get_object_or_404(Goal, pk=pk, user=request.user)
     goal.delete()
@@ -119,6 +134,20 @@ def session_create_for_goal(request, goal_id):
 def session_detail(request, pk):
     session = get_object_or_404(PracticeSession, pk=pk, user=request.user)
     return render(request, 'practice/session_detail.html', {'session': session})
+
+
+@login_required
+def session_edit(request, pk):
+    session = get_object_or_404(PracticeSession, pk=pk, user=request.user)
+    if request.method == 'POST':
+        form = PracticeSessionForm(request.POST, instance=session, user=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Session updated successfully.")
+            return redirect('session_detail', pk=session.pk)
+    else:
+        form = PracticeSessionForm(instance=session, user=request.user)
+    return render(request, 'practice/session_form.html', {'form': form, 'edit_mode': True, 'goal': session.goal})
 
 
 @login_required

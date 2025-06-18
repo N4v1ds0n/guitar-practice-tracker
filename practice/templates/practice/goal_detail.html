@@ -74,9 +74,12 @@
     <a href="{% url 'create_session_for_goal' goal.id %}" class="button">➕ Log Practice Session</a>
   </div>
 
+  <a href="{% url 'goal_edit' goal.pk %}" class="button">✏️ Edit Goal</a>
+
   <form action="{% url 'goal_delete' goal.pk %}" method="post" style="display:inline;">
     {% csrf_token %}
     <button type="submit" class="button" onclick="return confirm('Delete this goal?')">Delete</button>
+
 </form>
 
   <div style="margin-top: 1rem;">
