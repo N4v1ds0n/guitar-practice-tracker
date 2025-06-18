@@ -76,7 +76,7 @@
 
   <form action="{% url 'goal_delete' goal.pk %}" method="post" style="display:inline;">
     {% csrf_token %}
-    <button type="submit" onclick="return confirm('Delete this goal?')">Delete</button>
+    <button type="submit" class="button" onclick="return confirm('Delete this goal?')">Delete</button>
 </form>
 
   <div style="margin-top: 1rem;">

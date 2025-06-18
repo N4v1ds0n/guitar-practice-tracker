@@ -22,48 +22,50 @@
     
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
-    <header class="site-header">
-        <div class="container">
-            <h1 class="logo"><a href="{% url 'home' %}">Guitar Practice Tracker</a></h1>
+<body class="site-body">
+    <div class="site-wrapper">
+        <header class="site-header">
+            <div class="header-container">
+                <h1 class="logo"><a class="app-name" href="{% url 'home' %}">Guitar Practice Tracker</a></h1>
 
-            <nav class="main-nav">
-                <ul>
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url 'about' %}">About</a></li>
-                        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                        <li><a href="{% url 'profile' %}">{{ user.username }}</a></li>
-                        <li><a href="{% url 'logout' %}">Logout</a></li>
-                    {% else %}
-                        <li><a href="{% url 'about' %}">About</a></li>
-                        <li><a href="{% url 'login' %}">Login</a></li>
-                        <li><a href="{% url 'register' %}">Register</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    {% if messages %}
-        <section class="messages">
-            <div class="container">
-                <ul>
-                    {% for message in messages %}
-                        <li class="{{ message.tags }}">{{ message }}</li>
-                    {% endfor %}
-                </ul>
+                <nav class="main-nav">
+                    <ul>
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'about' %}">About</a></li>
+                            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                            <li><a href="{% url 'profile' %}">{{ user.username }}</a></li>
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a href="{% url 'about' %}">About</a></li>
+                            <li><a href="{% url 'login' %}">Login</a></li>
+                            <li><a href="{% url 'register' %}">Register</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
             </div>
-        </section>
-    {% endif %}
+        </header>
 
-    <main class="container">
-        {% block content %}{% endblock %}
-    </main>
+      {% if messages %}
+         <section class="messages">
+             <div class="message-container">
+                 <ul>
+                     {% for message in messages %}
+                         <li class="{{ message.tags }}">{{ message }}</li>
+                     {% endfor %}
+                 </ul>
+             </div>
+          </section>
+      {% endif %}
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>© 2025 Guitar Practice Tracker — Practice makes perfect 🎶</p>
-        </div>
-    </footer>
+      <main class="main-container">
+          {% block content %}{% endblock %}
+      </main>
+
+      <footer class="site-footer">
+           <div class="container">
+              <p>© 2025 Guitar Practice Tracker — Practice makes perfect</p>
+          </div>
+      </footer>
+    </div>
 </body>
 </html>

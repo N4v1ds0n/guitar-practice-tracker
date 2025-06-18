@@ -3,20 +3,22 @@
 {% block title %}Create Goal{% endblock %}
 
 {% block content %}
+<div class="goal_form-container">
   <h2>Create a New Goal</h2>
   <form method="post" id="goal-form">
     {% csrf_token %}
 
     <p>{{ form.goal_type.label_tag }} {{ form.goal_type }}</p>
     <p id="standard-goal">{{ form.standard_goal.label_tag }}
-       <select name="standard_goal" id="id_standard_goal">
+      <select name="standard_goal" id="id_standard_goal">
         <option value="">Select a standard goal</option>
         {% for goal in form.fields.standard_goal.queryset %}
           <option value="{{ goal.id }}" data-goal-type="{{ goal.goal_type }}">
             {{ goal.name }}
-      </option>
-    {% endfor %}
-  </select></p>
+          </option>
+        {% endfor %}
+      </select>
+    </p>
     <p id="goal-title">{{ form.title.label_tag }} {{ form.title }}</p>
     <p id="goal-description">{{ form.description.label_tag }} {{ form.description }}</p>
     
@@ -37,8 +39,9 @@
 
     <p>{{ form.target_date.label_tag }} {{ form.target_date }}</p>
 
-    <button type="submit">Save Goal</button>
+    <button type="submit" class="button">Save Goal</button>
+    <a href="{% url 'dashboard' %}" class="button">← Back to Goals</a>
   </form>
-  <a href="{% url 'dashboard' %}">← Back to Goals</a>
-  <script src="{% static 'js/goal_form.js' %}"></script>
+</div>
+<script src="{% static 'js/goal_form.js' %}"></script>
 {% endblock %}

@@ -4,21 +4,23 @@
 {% block title %}Log Practice Session{% endblock %}
 
 {% block content %}
-  <h2>Log a Practice Session</h2>
-  <form method="post">
-    {% csrf_token %}
-    <p class = 'goal'>{{ form.goal.label_tag }} {{ form.goal }}</p>
-    <p class = 'date'>{{ form.date.label_tag }} {{ form.date }}</p>
-    <p>The following fields are for your own statistics and progress tracking. Use them, as you see fit for any goals they are linked to or just for your personal stats.</p>
+  <div class="session-form-container">
+    <h2>Log a Practice Session</h2>
+    <form method="post">
+      {% csrf_token %}
+      <p class = 'goal'>{{ form.goal.label_tag }} {{ form.goal }}</p>
+      <p class = 'date'>{{ form.date.label_tag }} {{ form.date }}</p>
+      <p>The following fields are for your own statistics and progress tracking. Use them, as you see fit for any goals they are linked to or just for your personal stats.</p>
 
-    <p class = 'stat-input' id="tempo-wrapper">{{ form.tempo.label_tag }} {{ form.tempo }} bpm</p>
-    <p class = 'stat-input' id="accuracy-wrapper">{{ form.accuracy.label_tag }} {{ form.accuracy }}%</p>
-    <p class = 'stat-input'>{{ form.duration.label_tag }} {{ form.duration }} min</p>
-    <pclass = 'notes'>{{ form.notes.label_tag }} {{ form.notes }}</p>
-    <button class = 'button' type="submit">Save Session</button>
-  </form>
-  <a href="{% url 'dashboard' %}">← Back to Dashboard</a>
-  
+      <p class = 'stat-input' id="tempo-wrapper">{{ form.tempo.label_tag }} {{ form.tempo }} bpm</p>
+      <p class = 'stat-input' id="accuracy-wrapper">{{ form.accuracy.label_tag }} {{ form.accuracy }}%</p>
+      <p class = 'stat-input'>{{ form.duration.label_tag }} {{ form.duration }} min</p>
+      <pclass = 'notes'>{{ form.notes.label_tag }} {{ form.notes }}</p>
+      <button class = 'button' type="submit">Save Session</button>
+    </form>
+    <a href="{% url 'dashboard' %}" class="button">← Back to Dashboard</a>
+  </div>
+
   {{ goal_types|json_script:"goal-types" }}
   <script src="{% static 'js/session_form.js' %}"></script>
   

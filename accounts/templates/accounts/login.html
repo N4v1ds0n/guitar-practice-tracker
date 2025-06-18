@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2>Login</h2>
-<form method="post">
+<form class="login" method="post">
     {% csrf_token %}
     {% if form.errors %}
       <ul class="errorlist">
@@ -17,6 +17,6 @@
       </ul>
     {% endif %}
     {{ form.as_p }}
-    <button type="submit">Login</button>
+    <button type="submit" class="button">Login</button>
 </form>
 {% endblock %}

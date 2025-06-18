@@ -10,38 +10,50 @@
     --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
-    margin: 0;
+html, body {
+    height: 100%;
+}
+
+.site-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     font-family: var(--font-sans);
     background-color: var(--vintage-cream);
     color: var(--text-dark);
     line-height: 1.6;
 }
-.hidden {
-    display: none;
+
+.site-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Header & Footer */
-header,
-footer,
 .site-header,
 .site-footer {
     background-color: var(--vintage-green);
-    color: var(--text-light);
-    padding: 1rem;
+    color: var(--vintage-cream);
+    font-weight: 500;
+    padding: 1.5rem 1rem;
     text-align: center;
 }
 
+.main-container {
+    flex: 1;
+    padding: 2rem 1.5rem;
+}
+
 /* Header Layout */
-.site-header .container {
+.header-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.logo a {
+.app-name {
     color: var(--vintage-cream);
-    font-size: 1.8rem;
+    font-size: 3rem;
     text-decoration: none;
 }
 
@@ -66,26 +78,6 @@ footer,
     text-decoration: underline;
 }
 
-/* Links */
-a {
-    color: var(--auburn);
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* General Layout */
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
-}
-
 /* Typography */
 h1, h2, h3 {
     color: var(--maroon);
@@ -93,71 +85,116 @@ h1, h2, h3 {
 }
 
 /* Buttons & Forms */
-button,
-input[type="submit"] {
+.button {
     background-color: var(--auburn);
     color: var(--text-light);
     border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 5px;
-    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-button:hover,
-input[type="submit"]:hover {
-    background-color: var(--maroon);
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="date"],
-input[type="email"],
-input[type="password"],
-textarea,
-select {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-family: var(--font-sans);
     font-size: 1rem;
-}
-
-/* List Styles */
-ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-ul li {
     margin: 0.5rem 0;
-    padding: 0.5rem;
-    border-bottom: 1px solid #eee;
+}
+.button:hover,
+.button:focus {
+    background-color: var(--maroon);
+    color: var(--text-light);
+}
+
+/* helper */
+
+.hidden {
+    display: none;
 }
 
 /* Messages */
 .messages {
-    background-color: #fff4e5;
+    background-color: var(--text-light);
     border-left: 5px solid var(--auburn);
+    border-right: 5px solid var(--auburn);
     margin: 1rem auto;
     padding: 1rem;
     border-radius: 4px;
 }
 
-.messages ul {
+.message-container {
     margin: 0;
     padding: 0;
 }
 
+/* Template Specific */
 
-/* Dashboard Section */
+/* login */
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/* profile/ register */
+
+.profile-container,
+.register-container,
+.goal_form-container,
+.session-form-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.profile-container h2,
+.register-container h2,
+.goal_form-container h2,
+.session-form-container h2 {
+  color: var(--maroon);
+  margin-top: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.profile-container form,
+.register-container form,
+.goal_form-container form,
+.session-form-container form {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.profile-container form button,
+.register-container form button,
+.goal_form-container form button,
+.session-form-container form button {
+  margin-top: 1rem;
+}
+
+.profile-container form p,
+.register-container form p,
+.goal_form-container form p,
+.session-form-container form p {
+  margin-bottom: 1rem;
+}
+
+.profile-container hr,
+.register-container hr,
+.goal_form-container hr,
+.session-form-container hr {
+  margin: 2rem 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+form p .helptext {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+/* Dashboard */
 
 .dashboard-sections {
     display: flex;
@@ -174,6 +211,18 @@ ul li {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+/* dashboard List Styles */
+.dashboard-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.dashboard-section ul li {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border-bottom: 1px solid #eee;
 }
 
 .item-list {
@@ -229,6 +278,7 @@ ul li {
 
 .button {
   display: inline-block;
+  width: auto;
   background-color: var(--auburn);
   color: var(--text-light);
   padding: 0.6rem 1.2rem;

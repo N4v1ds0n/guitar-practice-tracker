@@ -49,10 +49,10 @@
 
   <form action="{% url 'session_delete' session.pk %}" method="post" style="display:inline;">
     {% csrf_token %}
-    <button type="submit" onclick="return confirm('Delete this session?')">Delete</button>
+    <button type="submit" class="button" onclick="return confirm('Delete this session?')">Delete</button>
   </form>
 
 
-  <a href="{% url 'dashboard' %}">← Back to Sessions</a>
+  <a href="{% url 'dashboard' %}" class="button">← Back to Sessions</a>
 </main>
 {% endblock %}
