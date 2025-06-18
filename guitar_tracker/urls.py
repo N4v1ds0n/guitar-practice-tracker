@@ -17,10 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from practice.views import home
+from practice import views
 
 urlpatterns = [
     path('', home, name='home'),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('practice/', include('practice.urls')),
+    path('api/standard-goal/', views.get_standard_goal_description, name='standard_goal_description'),
 ]

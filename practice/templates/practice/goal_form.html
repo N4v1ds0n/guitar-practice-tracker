@@ -8,10 +8,10 @@
     {% csrf_token %}
 
     <p>{{ form.goal_type.label_tag }} {{ form.goal_type }}</p>
+    <p id="standard-goal">{{ form.standard_goal.label_tag }} {{ form.standard_goal }}</p>
     <p id="goal-title">{{ form.title.label_tag }} {{ form.title }}</p>
     <p id="goal-description">{{ form.description.label_tag }} {{ form.description }}</p>
-    <p id="standard-goal">{{ form.standard_goal.label_tag }} {{ form.standard_goal }}</p>
-
+    
     <p class="field-target-tempo" id="target-tempo">{{ form.target_tempo.label_tag }} {{ form.target_tempo }}</p>
     {% if form.target_tempo.errors %}
         <span class="error">{{ form.target_tempo.errors.0 }}</span>

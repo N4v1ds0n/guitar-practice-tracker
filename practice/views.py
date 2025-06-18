@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Goal, PracticeSession
+from django.http import JsonResponse
+from .models import Goal, PracticeSession, StandardGoalDefinition
 from .forms import GoalForm, PracticeSessionForm
 from django.contrib.auth.decorators import login_required
 
@@ -92,3 +93,13 @@ def session_create_for_goal(request, goal_id):
 def session_detail(request, pk):
     session = get_object_or_404(PracticeSession, pk=pk, user=request.user)
     return render(request, 'practice/session_detail.html', {'session': session})
+
+
+@login_required
+def get_standard_goal_description(request):
+    goal_id = request.GET.get('id')
+    try:
+        goal = StandardGoalDefinition.objects.get(id=goal_id)
+        return JsonResponse({'description': goal.description, 'title': goal.name})
+    except StandardGoalDefinition.DoesNotExist:
+        return JsonResponse({'error': 'Goal not found'}, status=404)

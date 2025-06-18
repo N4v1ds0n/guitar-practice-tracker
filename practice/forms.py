@@ -1,5 +1,5 @@
 from django import forms
-from .models import Goal, PracticeSession
+from .models import Goal, PracticeSession, StandardGoalDefinition
 
 
 class GoalForm(forms.ModelForm):
