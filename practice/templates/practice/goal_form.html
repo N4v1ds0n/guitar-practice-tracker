@@ -8,7 +8,15 @@
     {% csrf_token %}
 
     <p>{{ form.goal_type.label_tag }} {{ form.goal_type }}</p>
-    <p id="standard-goal">{{ form.standard_goal.label_tag }} {{ form.standard_goal }}</p>
+    <p id="standard-goal">{{ form.standard_goal.label_tag }}
+       <select name="standard_goal" id="id_standard_goal">
+        <option value="">Select a standard goal</option>
+        {% for goal in form.fields.standard_goal.queryset %}
+          <option value="{{ goal.id }}" data-goal-type="{{ goal.goal_type }}">
+            {{ goal.name }}
+      </option>
+    {% endfor %}
+  </select></p>
     <p id="goal-title">{{ form.title.label_tag }} {{ form.title }}</p>
     <p id="goal-description">{{ form.description.label_tag }} {{ form.description }}</p>
     

@@ -29,12 +29,18 @@ document.addEventListener("DOMContentLoaded", () => {
       targetTempo.classList.remove("hidden");
       targetAccuracy.classList.remove("hidden");
       targetDuration.classList.remove("hidden");
-    } else  {
-      console.log('Standard goal selected');
+    } else  if (value === "technique") {
+      console.log('Technique goal selected');
       standardGoals.classList.remove("hidden");
       targetTempo.classList.remove("hidden");
       targetAccuracy.classList.remove("hidden");
       targetDuration.classList.remove("hidden");
+    } else  if (value === "repertoire") {
+      console.log('Repertoire goal selected');
+      standardGoals.classList.remove("hidden");
+    } else  if (value === "routine") {
+      console.log('Routine goal selected');
+      standardGoals.classList.remove("hidden");
     }
   }
 
@@ -67,13 +73,37 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   };
 
+  function filterStandardGoalsByGoalType() {
+    const selectedGoalType = goalTypeField.value;
+    const options = standardGoal.querySelectorAll("option");
+
+    options.forEach(option => {
+      const type = option.dataset.goalType;
+      if (!type || selectedGoalType === 'custom') {
+        option.hidden = false;
+      } else {
+        option.hidden = type !== selectedGoalType;
+      }
+    });
+
+  // Reset the value to prevent invalid selections
+  standardGoal.value = "";
+  }
+
   // Attach change event to the goal type field
-  goalTypeField.addEventListener("change", updateFormVisibility);
+  goalTypeField.addEventListener("change", () => {
+    updateFormVisibility();
+    filterStandardGoalsByGoalType();
+    });
+
+
   standardGoal.addEventListener("change", autofillStandardGoalFields);
+
 
   // Run on initial load
   updateFormVisibility();
   if (goalTypeField.value !== "custom") {
     autofillStandardGoalFields();
+    filterStandardGoalsByGoalType();
   }
 });
