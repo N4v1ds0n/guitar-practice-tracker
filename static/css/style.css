@@ -290,3 +290,9 @@ form p .helptext {
 .button:hover {
   background-color: var(--maroon);
 }
+
+.goal-link {
+  color: var(--auburn);
+  font-weight: bold;
+  text-decoration: none;
+}

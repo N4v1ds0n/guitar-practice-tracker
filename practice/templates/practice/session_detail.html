@@ -12,7 +12,7 @@
 
     {% if session.goal %}
       <p><strong>Associated Goal:</strong>
-        <a href="{% url 'goal_detail' session.goal.pk %}">{{ session.goal.title }}</a>
+        <a href="{% url 'goal_detail' session.goal.pk %}" class="goal-link">{{ session.goal.title }}</a>
       </p>
     {% else %}
       <p><em>No goal linked to this session.</em></p>
