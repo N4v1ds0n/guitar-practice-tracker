@@ -219,4 +219,394 @@ The colors I wanted to stay close to  [Coolors.co](https://coolors.co/)
 
 ### Fonts
 
- The fonts selected were from Google Fonts, Montserrat wits sans-serif as a backup font.
+ The fonts i specified as --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif in this. I wantend sans-serifs, because they ensure readability and since the app can at some point include a plethora of information, I wanted to make sure that the font is readable even when it gets 'crowded'.
+
+### Structure
+
+#### Page flow
+
+The basic site is designed as clean as possible with a Clean header containing the app name and the navbar, a footer with a signature and social media links and the main content, which is subject to change while navigation through the app.
+
+- home page
+This is the first entrance page it features a simple welcome and is basically just a provider for further navigation, if the user is not logge in yet it will provide three options, about, register and login;
+
+- about page
+nothing fancy, just a short descriptive text about the app and its purpose
+
+- login page
+straightforward login page to fill in your credentials and enter the user space
+
+- register page
+this page is for new users who need to create an account first after creating their account they will be redirected to the dashboard
+
+- profile page
+users can alway edit their data provide additional info and change their passwort on this page
+
+- dashboard
+this is the page that lists all goals and practice sessions by the user, it also provides the option to create them
+
+-goal_form
+if you want to create a goal you will be asked to put the goal specifics on this page and save
+
+-goal_detail
+if you created a goal or clicked a goal from your list, this page provides you with a detail view of your goal. It will also feature all sessions linked to that goal.
+
+-session_form
+if you want to create a practice session you will be asked to put the specifics on this page and save
+
+-session_detail
+if you created a practice session or clicked a it from your list on the dashboard, this page provides you with a detail view.
+
+#### Database
+
+- The DB s created with Python and the Django framework and connects to a Postgres instance provided by Code Institute for the deployed Heroku version(production)
+- Below find a diagramm showing all the models and connections
+
+<details><summary>Show diagram</summary>
+<img src="docs\erd\guitar_practice_tracker_erd.png">
+</details>
+
+##### Models
+
+###### CustomUser (inherits from AbstractUser, only relevant fields are noted here)
+| Field Name | Field Type | Notes |
+|---|---|---|
+| id| id | automatically created (from AbstractUser) |
+| photo | Image Field | Optional. Uploaded to MEDIA_ROOT/user_images/<username> |
+|| username | Required. Unique. Used for authentication. (from AbstractUser) |
+|| password | Hashed password field. Required. |
+|| email | Optional. (from AbstractUser) |
+|| first_name | Optional. (from AbstractUser) |
+|| last_name | Optional. (from AbstractUser) |
+
+
+###### StandardGoalDefinition
+| Field Name | Field Type | Notes |
+|---|---|---|
+| user| ForeignKey | Links to CustomUser. On delete, all related goals are also deleted. |
+| title | Charfield | Required. Max length: 100. |
+| description | TextField | Optional. Can contain long, formatted text about the goal. |
+| goal_type | CharField | Choice of 'technique', 'repertoire', 'routine', 'custom'. |
+
+
+###### Goal
+| Field Name | Field Type | Notes |
+|---|---|---|
+| user| ForeignKey | Links to CustomUser. On delete, all related goals are also deleted. |
+| title | Charfield | Required. Max length: 100. |
+| description | TextField | Optional. Can contain long, formatted text about the goal. |
+| goal_type | CharField | Choice of 'technique', 'repertoire', 'routine', 'custom'. |
+| standard_goal | ForeignKey | Optional. Links to StandardGoalDefinition. Null if custom goal. |
+| goal | ForeignKey (self) | Optional self-referencing field to allow subgoals in future.|
+| target_tempo | PositiveIntegerField | Optional. Relevant for technique/custom. Target tempo in BPM.|
+|target_accuracy | FloatField | Optional. Percentage value (e.g., 95.0 = 95%). Relevant for technique/custom. |
+target_duration | PositiveIntegerField | Optional. Target total minutes of practice (e.g., 600 minutes). |
+| routine_target_days | PositiveIntegerField | Optional. For routine goals: how many consecutive days define "success" (e.g., 7) will be used for future streak achievements. |
+| created_at | DateTimeField | Auto-set to current date/time when the goal is created. |
+| target_date | DateField | Optional. The date by which the user wants to complete the goal. |
+
+###### PracticeSession
+| Field Name | Field Type | Notes |
+|---|---|---|
+| user| ForeignKey | Links to CustomUser. On delete, all related sessions are also deleted. |
+| goal | ForeignKey |Optional. Links to a Goal. Null if not tied to a specific goal.|
+| date | DateTimeField | Defaults to the moments of session creation |
+| tempo | PositiveIntegerField | Optional. Relevant for technique/custom. Target tempo in BPM.|
+| accuracy | FloatField | Optional. Percentage value (e.g., 95.0 = 95%). Relevant for technique/custom goals. |
+| duration | PositiveIntegerField | Optional. Target total minutes of practice . |
+| notes | TextField | Optional. Freeform user notes about the session. |
+
+
+##### Summary of Foreign Keys & Relationships
+| Relationship | Source Model | Target Model | Notes |
+|---|---|---|--|
+| user → goals | Goal | CustomUser | One user can have many goals |
+|standard_goal → name | Goal | StandardGoalDefinition | Used to preload common goals |
+|goal → subgoals | Goal | Goal (self) |	A goal can have subgoals (e.g. "Master Scales" → "Major Scale") |
+|goal → sessions | PracticeSession | Goal | A goal can have many practice sessions |
+|user → sessions | PracticeSession | CustomUser | Each user can log many practice sessions |
+
+
+### Wireframes
+The wireframes were created using Balsamiq
+<details><summary></summary>
+<img src="">
+</details>
+
+## Technologies Used
+
+### Languages & Frameworks
+
+- HTML
+- CSS
+- Javascript
+- Python
+- Django
+
+
+### Libraries & Tools
+
+- [Am I Responsive](http://ami.responsivedesign.is/)
+- [Balsamiq](https://balsamiq.com/)
+- [Bootstrap v5.2](https://getbootstrap.com/)
+- [Cloudinary](https://cloudinary.com/)
+- [Favicon.io](https://favicon.io)
+- [Chrome dev tools](https://developers.google.com/web/tools/chrome-devtools/)
+- [Font Awesome](https://fontawesome.com/)
+- [Git](https://git-scm.com/)
+- [GitHub](https://github.com/)
+- [Heroku Platform](https://id.heroku.com/login)
+- [Postgres](https://www.postgresql.org/)
+- Validation:
+  - [WC3 Validator](https://validator.w3.org/)
+  - [Jigsaw W3 Validator](https://jigsaw.w3.org/css-validator/)
+  - [JShint](https://jshint.com/)
+  - [Flake8](https://flake8.pycqa.org/)
+  - [Lighthouse](https://developers.google.com/web/tools/lighthouse/)
+  - [Wave Validator](https://wave.webaim.org/)
+
+##### Back to [top](#table-of-contents)
+
+
+## Features
+
+### Navigation & Layout
+    Responsive layout for desktop and mobile
+    Top navigation bar with links rendering based on authentication status:
+
+        Home  - via app name (always)
+
+        About - via Navbar (always)
+
+        Dashboard - via Navbar (if logged in)
+
+        Profile - via Navbar, shows username (if logged in)
+
+        Login / Logout - via Navbar changes with authentication status
+
+        Register - via Navbar (if logged out)
+    
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+
+### Sticky footer with:
+
+    Social media icons
+
+    signature info and project name
+
+    Mobile-friendly layout
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+### Page Styling
+
+    Global styling using CSS variables and custom palette
+
+    Messages framework support for user feedback
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+### User Features
+
+    User registration with username, email, password
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+    User authentication (login/logout)
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+    User profile page:
+
+        View & edit username/email
+
+        Upload/change profile picture
+
+        Change password
+
+        Delete account with confirmation
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+
+Goal Management
+
+    Create a goal (custom or based on standard templates)
+
+    Goal types:
+
+        Technique
+
+        Repertoire
+
+        Routine
+
+        Custom
+
+    Dynamic goal form UI:
+
+        Fields change based on selected goal type
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+    Standard goal selection:
+
+        Autofill title & description via AJAX
+
+        Filtered dropdown based on selected goal type
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+    Edit goals:
+
+        Update fields post-creation
+
+    Delete goals:
+
+        With user confirmation
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+    Optional target metrics:
+
+        Tempo, accuracy, duration (for technique/custom)
+
+        Target date
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+    Goal detail page:
+
+        Metadata: type, description, target date
+
+        Linked sessions
+
+        log a session for that goal
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+📆 Practice Session Management
+
+    Create session (linked or unlinked to goal)
+
+    Session fields:
+
+        Date & time
+
+        Duration (min)
+
+        Tempo (BPM)
+
+        Accuracy (%)
+
+        Notes
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+
+    Dynamic form logic:
+
+        Shows/hides tempo/accuracy depending on goal type
+
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+    Edit & delete practice sessions
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+
+
+📊 Dashboard & Goal Detail View
+
+    Dashboard for authenticated users:
+
+        List of active goals
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+        View list of past sessions
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+        View sessions linked to specific goal
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+
+🔐 Security & Validation
+
+    CSRF protection for all forms
+
+    Password hashing via Django auth
+
+    Form field validation:
+
+        Custom form logic for goal type-specific required fields
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+    Email & username uniqueness enforced
+
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+    Image upload security via Pillow
+
+🛠️ Admin Features
+
+    Access to Django admin interface
+
+    Manage:
+
+        Users
+
+        Goals
+
+        Practice Sessions
+
+        Standard Goal Templates
+
+<details><summary>Screenshots</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
