@@ -168,32 +168,30 @@ goals and provides detailed session logging, progress tracking, and user profile
 - Epics were created using the milestones feature
 - Backlog, In Progress, Done headings were used in a board
 
-<details>
+<details><summary>Epics</summary>
+<img src="docs/gitproject/closedepics.png">
+<img src="docs/gitproject/EPIC1.png">
+<img src="docs/gitproject/Epic2.png">
+<img src="docs/gitproject/EPIC3.png">
+<img src="docs/gitproject/EPIC4.png">
+<img src="docs/gitproject/EPIC5.png">
+<img src="docs/gitproject/Epic6.png">
+Epic 7 closed items:
+<img src="docs/gitproject/EPIC7_2.png">
+Epic 7 open items:
+<img src="docs/gitproject/EPIC7_1.png">
 
-![Epics](docs/gitproject/closedepics.png)
-![Epic 1](docs/gitproject/EPIC1.png)
-![Epic 2](docs/gitproject/EPIC2.png)
-![Epic 3](docs/gitproject/EPIC3.png)
-![Epic 4](docs/gitproject/EPIC4.png)
-![Epic 5](docs/gitproject/EPIC5.png)
-![Epic 6](docs/gitproject/EPIC6.png)
-![Epic 7 (closed items)](docs/gitproject/EPIC7_1.png)
-![Epics 7 (open items)](docs/gitproject/EPIC7_2.png)
+Epic 8 for future plans:
+<img src="docs/gitproject/EPIC8.png">
 
-Section for future endeavours:
+User stories:
+<img src="docs/gitproject/userstories.png">
 
-![open Epics](docs/gitproject/openepics.png)
-![Epic 8](docs/gitproject/EPIC8.png)
-
-
-User Stories
-
-![user stories]("docs/gitproject/userstories.png")
-
-View of the Board
-
+View of the Board:
 <img src="docs/gitproject/kanbanboard.png">
+
 </details>
+
 
 ## Design
 
@@ -205,7 +203,7 @@ The colors I wanted to stay close to  [Coolors.co](https://coolors.co/)
 
 <details>
     <summary>See colour pallet</summary>
-    <img src="docs/design/color-palettte.png">
+    <img src="docs/design/color-palette.png">
 </details>
 
 ### Fonts

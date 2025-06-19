@@ -6,9 +6,9 @@
   <section>
     <h2>Practice Session – {{ session.date }}</h2>
 
-    <p><strong>Duration:</strong> {{ session.duration_minutes }} minutes</p>
-    <p><strong>Speed:</strong> {{ session.speed }}</p>
-    <p><strong>Mistakes:</strong> {{ session.mistakes }}</p>
+    <p><strong>Duration:</strong> {{ session.duration }} minutes</p>
+    <p><strong>Tempo:</strong> {{ session.tempo }} bpm</p>
+    <p><strong>Accuracy:</strong> {{ session.accuracy }}%</p>
 
     {% if session.goal %}
       <p><strong>Associated Goal:</strong>
@@ -17,34 +17,6 @@
     {% else %}
       <p><em>No goal linked to this session.</em></p>
     {% endif %}
-  </section>
-  <section>
-    <h2>Session Performance vs Goal</h2>
-    {% with progress=session.get_progress_against_goal %}     
-      {% if progress %}
-        {% for metric, value in progress.items %}
-          <div style="margin-bottom: 1em;">
-            <strong>{{ metric|title }}</strong>
-            <div style="background-color: #ddd; height: 20px; border-radius: 5px;">
-              <div style="
-                background-color: #2196f3;
-                width: {{ value|floatformat:0 }}%;
-                height: 100%;
-                border-radius: 5px;
-                text-align: right;
-                padding-right: 5px;
-                color: white;
-                font-size: 12px;
-              ">
-                {{ value|floatformat:0 }}%
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-      {% else %}
-        <p>This session is not linked to a goal or has no measurable progress.</p>
-      {% endif %}
-    {% endwith %}
   </section>
 
   <a href="{% url 'session_edit' session.pk %}" class="button">✏️ Edit Session</a>
