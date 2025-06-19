@@ -168,41 +168,32 @@ goals and provides detailed session logging, progress tracking, and user profile
 - Epics were created using the milestones feature
 - Backlog, In Progress, Done headings were used in a board
 
-<details><summary>Epics</summary>
-<img src="docs\github_project\closedepics.png">
-Epics
-<img src="docs\github-project\EPIC1.png">
-Epic 1
-<img src="docs\github-project\EPIC2.png">
-Epic 2
-<img src="docs\github-project\EPIC3.png">
-Epic 3
-<img src="docs\github-project\EPIC4.png">
-Epic 4
-<img src="docs\github-project\EPIC5.png">
-Epic 5
-<img src="docs\github-project\EPIC6.png">
-Epic 6
-<img src="docs\github-project\EPIC7.1.png">
-Epic 7 (closed items)
-<img src="docs\github-project\EPIC7.2.png">
-Epics 7 (open items)
+
+![Epics](docs/github_project/closedepics.png)
+![Epic 1](docs/github_project/EPIC1.png)
+![Epic 2](docs/github_project/EPIC2.png)
+![Epic 3](docs/github_project/EPIC3.png)
+![Epic 4](docs/github_project/EPIC4.png)
+![Epic 5](docs/github_project/EPIC5.png)
+![Epic 6](docs/github_project/EPIC6.png)
+![Epic 7 (closed items)](docs/github_project/EPIC7.1..png)
+![Epics 7 (open items)](docs/github_project/EPIC7.2..png)
 
 Section for future endeavours:
 
-<img src="docs\github-project\openepics.png">
+<img src="docs/github-project/openepics.png">
 open Epics
-<img src="docs\github-project\EPIC8.png">
+<img src="docs/github-project/EPIC8.png">
 Epic 8
-</details>
+
 
 <details><summary>User Stories</summary>
-<img src="docs\github-project\userstories.png">
-User Stories
+    <img src="docs/github-project/userstories.png">
+    User Stories
 </details>
 
 <details><summary>Kanban</summary>
-<img src="docs\github-project\userstories.png">
+<img src="docs/github-project/userstories.png" alt="User Stories">
 View of the Board
 </details>
 

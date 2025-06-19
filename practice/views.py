@@ -5,7 +5,7 @@ from .models import Goal, PracticeSession, StandardGoalDefinition
 from .forms import GoalForm, PracticeSessionForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from django.core.exceptions import PermissionDenied
 # Create your views here.
 
 
@@ -166,3 +166,13 @@ def get_standard_goal_description(request):
         return JsonResponse({'description': goal.description, 'title': goal.name})
     except StandardGoalDefinition.DoesNotExist:
         return JsonResponse({'error': 'Goal not found'}, status=404)
+
+
+def trigger_403(request):                       # For page tests
+    """Force a 403 Forbidden error."""
+    raise PermissionDenied
+
+
+def trigger_500(request):                       # For page tests
+    """Force a 500 Internal Server Error."""
+    1 / 0  # ZeroDivisionError forces a 500
