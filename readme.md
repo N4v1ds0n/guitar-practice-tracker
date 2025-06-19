@@ -499,7 +499,7 @@ Goal Management
 <img src="docs\design\color-palettte.png">
 </details>
 
-📆 Practice Session Management
+Practice Session Management
 
     Create session (linked or unlinked to goal)
 
@@ -644,50 +644,40 @@ Goal Management
 
 | Page | File | Screenshot |
 | --- | --- | --- |
-| accounts\templates\accounts\login.html | [login](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/login.html) | ![screenshot](docs/validation/html/login.png) |
-| accounts\templates\accounts\profile.html | [profile](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/profile.html) | ![screenshot](docs/validation/html/profile.png) |
-| accounts\templates\accounts\register.html | [register](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/register.html) | ![screenshot](docs/validation/html/register.png) |
-| practice\templates\practice\about.html | [about](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/about.html) | ![screenshot](docs/validation/html/about.png) |
-| practice\templates\practice\dashboard.html |[dashboard](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/dashboard.html) | ![screenshot](docs/validation/html/dashboard.png) |
-| practice\templates\practice\goal_detail.html |[goal_detail](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/goal_detail.html) | ![screenshot](docs/validation/html/goal_detail.png) |
-| practice\templates\practice\goal_form.html |[goal_form](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/goal_form.html) | ![screenshot](docs/validation/html/goal_form.png) |
-| practice\templates\practice\home.html |[home](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/home.html) | ![screenshot](docs/validation/html/home.png) |
-| practice\templates\practice\session_detail.html |[session_detail](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/session_detail.html) | ![screenshot](docs/validation/html/session_detail.png) |
-| practice\templates\practice\session_form.html |[session_form](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/session_form.html) | ![screenshot](docs/validation/html/session_form.png) |
+| accounts\templates\accounts\login.html | [login](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/login.html) | ![screenshot](docs/validation/access/login.png) |
+| accounts\templates\accounts\profile.html | [profile](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/profile.html) | ![screenshot](docs/validation/access/profile.png) |
+| accounts\templates\accounts\register.html | [register](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/register.html) | ![screenshot](docs/validation/access/register.png) |
+| practice\templates\practice\about.html | [about](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/about.html) | ![screenshot](docs/validation/access/about.png) |
+| practice\templates\practice\dashboard.html |[dashboard](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/dashboard.html) | ![screenshot](docs/validation/access/dashboard.png) |
+| practice\templates\practice\goal_detail.html |[goal_detail](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/goal_detail.html) | ![screenshot](docs/validation/access/goal_detail.png) |
+| practice\templates\practice\goal_form.html |[goal_form](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/goal_form.html) | ![screenshot](docs/validation/access/goal_form.png) |
+| practice\templates\practice\home.html |[home](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/home.html) | ![screenshot](docs/validation/access/home.png) |
+| practice\templates\practice\session_detail.html |[session_detail](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/session_detail.html) | ![screenshot](docs/validation/access/session_detail.png) |
+| practice\templates\practice\session_form.html |[session_form](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/session_form.html) | ![screenshot](docs/validation/access/session_form.png) |
 
 
 ## Performance
 
 | Page | File | Screenshot |
 | --- | --- | --- |
-| accounts\templates\accounts\login.html | [login](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/login.html) | ![screenshot](docs/validation/html/login.png) |
-| accounts\templates\accounts\profile.html | [profile](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/profile.html) | ![screenshot](docs/validation/html/profile.png) |
-| accounts\templates\accounts\register.html | [register](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/register.html) | ![screenshot](docs/validation/html/register.png) |
-| practice\templates\practice\about.html | [about](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/about.html) | ![screenshot](docs/validation/html/about.png) |
-| practice\templates\practice\dashboard.html |[dashboard](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/dashboard.html) | ![screenshot](docs/validation/html/dashboard.png) |
-| practice\templates\practice\goal_detail.html |[goal_detail](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/goal_detail.html) | ![screenshot](docs/validation/html/goal_detail.png) |
-| practice\templates\practice\goal_form.html |[goal_form](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/goal_form.html) | ![screenshot](docs/validation/html/goal_form.png) |
-| practice\templates\practice\home.html |[home](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/home.html) | ![screenshot](docs/validation/html/home.png) |
-| practice\templates\practice\session_detail.html |[session_detail](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/session_detail.html) | ![screenshot](docs/validation/html/session_detail.png) |
-| practice\templates\practice\session_form.html |[session_form](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/session_form.html) | ![screenshot](docs/validation/html/session_form.png) |
+| accounts\templates\accounts\login.html | [login](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/login.html) | ![screenshot](docs/validation/perf/login.png) |
+| accounts\templates\accounts\profile.html | [profile](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/profile.html) | ![screenshot](docs/validation/perf/profile.png) |
+| accounts\templates\accounts\register.html | [register](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/register.html) | ![screenshot](docs/validation/perf/register.png) |
+| practice\templates\practice\about.html | [about](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/about.html) | ![screenshot](docs/validation/perf/about.png) |
+| practice\templates\practice\dashboard.html |[dashboard](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/dashboard.html) | ![screenshot](docs/validation/perf/dashboard.png) |
+| practice\templates\practice\goal_detail.html |[goal_detail](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/goal_detail.html) | ![screenshot](docs/validation/perf/goal_detail.png) |
+| practice\templates\practice\goal_form.html |[goal_form](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/goal_form.html) | ![screenshot](docs/validation/perf/goal_form.png) |
+| practice\templates\practice\home.html |[home](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/home.html) | ![screenshot](docs/validation/perf/home.png) |
+| practice\templates\practice\session_detail.html |[session_detail](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/session_detail.html) | ![screenshot](docs/validation/perf/session_detail.png) |
+| practice\templates\practice\session_form.html |[session_form](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/session_form.html) | ![screenshot](docs/validation/perf/session_form.png) |
 
 
-### Performing tests on various devices
-The pages were testet on:
-- Desktop pc
-- Samsung Galaxy A52
-- Samsung Galaxy A...
-- Kindle fire tablet
+## Testing
 
-### Browser compatibility
+### Manual testing
 
-- Mozilla Firefox
-- Google Chrome
-- Microsoft Edge
 
-### Testing user stories
-
-1. As a first-time visitor, I want to understand what the shop offers so I can figure out if you build the kind of guitar I’m looking for.
+1. 	I want to create a personal user account so I can track my practice goals and sessions securely.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
@@ -701,4 +691,76 @@ The pages were testet on:
 <img src="docs/user-stories/userstory-1-1of5.png">
 
 </details>
+
+2. 	I want to log into my account so I can access my private dashboard and practice data. 
+
+3. 	I want to log out easily so I can ensure my data is not accessible to others.
+
+4. 	I want to navigate the site freely and explore all the features
+
+5. 	I want to view an overview of my goals on the dashboard so I can stay focused on my current practice priorities.
+
+6. 	I want to create a new goal so I can stay focused on my current practice priorities.
+
+7. 	I want to select a goal type so I can define what I want to work on
+
+8. 	I want to autofill a goal from a predefined list of standard goals so the app tailors the required input fields accordingly
+
+9. 	I want to log a practice session so I can track the time I’ve spent and key metrics 
+
+10. 	I want the session form to adjust to the selected goal type so irrelevant input fields are hidden
+
+11. 	I want to view a list of all my past practice sessions so I can reflect on what I’ve done so far.
+
+12. 	I want to link sessions to a specific goal so I can see my work in the context of a particular objective.
+
+13.	I want to edit a goal or a session after creating it so I can fix mistakes or adjust targets.
+
+14. 	I want to delete goals and sessions so I can clean up outdated or irrelevant data.
+
+15.	I want to see my profile and update basic details like username and email so I stay in control of my account.
+
+16. 	I want to upload or change a profile picture so my account feels more personal.
+
+17. 	I want to delete my account so I can remove my data completely if I no longer want to use the app.
+
+
+
+### Admin / Authorised User
+
+18. 	I want to create and manage standard goal definitions so users have access to pre-built, structured goal templates.
+
+19.	I want to view all registered users through the Django admin panel so I can monitor usage and manage inappropriate or inactive accounts.
+
+20. 	I want to make certain fields required or optional at the model level so data integrity is preserved throughout the app.
+
+21.	I want to test all user flows and forms directly in the admin panel so I can quickly identify and resolve edge cases or bugs.
+
+
+
+### Site Owner/ Project Maintainer
+
+22.	I want to deploy the project in a maintainable and scalable way so it can be hosted on a platform like Heroku or Render with minimal downtime.
+
+23. 	I want to structure the code with reusable components so future features like progress charts or notifications can be added easily.
+
+24. 	I want to include documentation (like this README) so other developers can understand and contribute to the project easily.
+
+25. 	I want to integrate basic accessibility and responsive design best practices so the app is usable across devices and for users with diverse needs.  
+
+26. 	As a Site Owner I can edit data entered into my site so that all submitted data is maintained to avoid errors
+
+
+### Performing tests on various devices
+The pages were testet on:
+- Desktop pc
+- Samsung Galaxy A52
+- Samsung Galaxy A53
+- Kindle fire tablet 7
+
+### Browser compatibility
+
+- Mozilla Firefox
+- Google Chrome
+- Microsoft Edge
 
