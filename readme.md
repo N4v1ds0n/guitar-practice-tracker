@@ -1,5 +1,10 @@
 # GUITAR PRACTICE TRACKER
 
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/t/n4v1ds0n/guitar-practice-tracker)](https://www.github.com/n4v1ds0n/guitar-practice-tracker/commits/main)
+[![GitHub last commit](https://img.shields.io/github/last-commit/n4v1ds0n/guitar-practice-tracker)](https://www.github.com/n4v1ds0n/guitar-practice-tracker/commits/main)
+[![GitHub repo size](https://img.shields.io/github/repo-size/n4v1ds0n/guitar-practice-tracker)](https://www.github.com/n4v1ds0n/guitar-practice-tracker)
+
+
 ![Am I Responsive](docs/am-i-responsive.PNG)
 
 **Developer: Damian Droste**
@@ -159,39 +164,59 @@ goals and provides detailed session logging, progress tracking, and user profile
 
 
 ### Kanban, Epics & User Stories
-- GitHub Kanban was used to track all open user stories
+- GitHub was used to track all open user stories
 - Epics were created using the milestones feature
-- Backlog, In Progress, Done headings were used in the kanban
+- Backlog, In Progress, Done headings were used in a board
 
 <details><summary>Epics</summary>
-<img src="docs/github-project/closedepics.png">
+<img src="docs\github_project\closedepics.png">
 Epics
-<img src="docs/github-project/EPIC1.png">
+<img src="docs\github-project\EPIC1.png">
 Epic 1
-<img src="docs/github-project/EPIC2.png">
+<img src="docs\github-project\EPIC2.png">
 Epic 2
-<img src="docs/github-project/EPIC3.png">
+<img src="docs\github-project\EPIC3.png">
 Epic 3
-<img src="docs/github-project/EPIC4.png">
+<img src="docs\github-project\EPIC4.png">
 Epic 4
-<img src="docs/github-project/EPIC5.png">
+<img src="docs\github-project\EPIC5.png">
 Epic 5
-<img src="docs/github-project/EPIC6.png">
+<img src="docs\github-project\EPIC6.png">
 Epic 6
-<img src="docs/github-project/EPIC7.1.png">
+<img src="docs\github-project\EPIC7.1.png">
 Epic 7 (closed items)
-<img src="docs/github-project/EPIC7.2.png">
+<img src="docs\github-project\EPIC7.2.png">
 Epics 7 (open items)
 
 Section for future endeavours:
 
-<img src="docs/github-project/openepics.png">
+<img src="docs\github-project\openepics.png">
 open Epics
-<img src="docs/github-project/EPIC8.png">
+<img src="docs\github-project\EPIC8.png">
 Epic 8
 </details>
 
 <details><summary>User Stories</summary>
-<img src="docs/github-project/userstories.png">
+<img src="docs\github-project\userstories.png">
 User Stories
 </details>
+
+<details><summary>Kanban</summary>
+<img src="docs\github-project\userstories.png">
+View of the Board
+</details>
+
+## Design
+
+### Colours
+
+I chose warm and and vintage colours while maintaining a modern design. I wanted the app to look like a modern offspring of my custom guitar shop which uses the same colour palette. 
+
+The colors I wanted to stay close to  [Coolors.co](https://coolors.co/)
+<details><summary>See colour pallet</summary>
+<img src="docs\design\color-palettte.png">
+</details>
+
+### Fonts
+
+ The fonts selected were from Google Fonts, Montserrat wits sans-serif as a backup font.
