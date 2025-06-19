@@ -393,11 +393,11 @@ The wireframes were created using Balsamiq
 
 ### Sticky footer with:
 
-    Social media icons
+    - Social media icons
 
-    signature info and project name
+    - signature info and project name
 
-    Mobile-friendly layout
+    - Mobile-friendly layout
 
 <details><summary>Screenshots</summary>
 <img src="docs\design\color-palettte.png">
@@ -405,9 +405,9 @@ The wireframes were created using Balsamiq
 
 ### Page Styling
 
-    Global styling using CSS variables and custom palette
+    - Global styling using CSS variables and custom palette
 
-    Messages framework support for user feedback
+    - Messages framework support for user feedback
 
 <details><summary>Screenshots</summary>
 <img src="docs\design\color-palettte.png">
@@ -429,13 +429,10 @@ The wireframes were created using Balsamiq
 
     User profile page:
 
-        View & edit username/email
-
-        Upload/change profile picture
-
-        Change password
-
-        Delete account with confirmation
+        - View & edit username/email
+        - Upload/change profile picture
+        - Change password
+        - Delete account with confirmation
 
 <details><summary>Screenshots</summary>
 <img src="docs\design\color-palettte.png">
@@ -448,13 +445,10 @@ Goal Management
 
     Goal types:
 
-        Technique
-
-        Repertoire
-
-        Routine
-
-        Custom
+        - Technique
+        - Repertoire
+        - Routine
+        - Custom
 
     Dynamic goal form UI:
 
@@ -488,9 +482,8 @@ Goal Management
 
     Optional target metrics:
 
-        Tempo, accuracy, duration (for technique/custom)
-
-        Target date
+        - Tempo, accuracy, duration (for technique/custom)
+        - Target date
 
 <details><summary>Screenshots</summary>
 <img src="docs\design\color-palettte.png">
@@ -498,11 +491,9 @@ Goal Management
 
     Goal detail page:
 
-        Metadata: type, description, target date
-
-        Linked sessions
-
-        log a session for that goal
+        - Metadata: type, description, target date
+        - Linked sessions
+        - log a session for that goal
 
 <details><summary>Screenshots</summary>
 <img src="docs\design\color-palettte.png">
@@ -514,15 +505,11 @@ Goal Management
 
     Session fields:
 
-        Date & time
-
-        Duration (min)
-
-        Tempo (BPM)
-
-        Accuracy (%)
-
-        Notes
+        - Date & time
+        - Duration (min)
+        - Tempo (BPM)
+        - Accuracy (%)
+        - Notes
 
 <details><summary>Screenshots</summary>
 <img src="docs\design\color-palettte.png">
@@ -598,15 +585,120 @@ Goal Management
 
     Manage:
 
-        Users
-
-        Goals
-
-        Practice Sessions
-
-        Standard Goal Templates
+        - Users
+        - Goals
+        - Practice Sessions
+        - Standard Goal Templates
 
 <details><summary>Screenshots</summary>
 <img src="docs\design\color-palettte.png">
+</details>
+
+## Validation
+
+### HTML Validation (W3C)
+
+### HTML-validation
+
+[HTML W3C Validator](https://validator.w3.org) was used to validate html pages I am not providing aspecific Url, since the site is not static:
+
+| Directory | File | Screenshot |
+|---|---|---|
+| accounts\templates\accounts\login.html | [login](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/login.html) | ![screenshot](docs/validation/html/login.png) |
+| accounts\templates\accounts\profile.html | [profile](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/profile.html) | ![screenshot](docs/validation/html/profile.png) |
+| accounts\templates\accounts\register.html | [register](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/register.html) | ![screenshot](docs/validation/html/register.png) |
+| practice\templates\practice\about.html | [about](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/about.html) | ![screenshot](docs/validation/html/about.png) |
+| practice\templates\practice\dashboard.html |[dashboard](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/dashboard.html) | ![screenshot](docs/validation/html/dashboard.png) |
+| practice\templates\practice\goal_detail.html |[goal_detail](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/goal_detail.html) | ![screenshot](docs/validation/html/goal_detail.png) |
+| practice\templates\practice\goal_form.html |[goal_form](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/goal_form.html) | ![screenshot](docs/validation/html/goal_form.png) |
+| practice\templates\practice\home.html |[home](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/home.html) | ![screenshot](docs/validation/html/home.png) |
+| practice\templates\practice\session_detail.html |[session_detail](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/session_detail.html) | ![screenshot](docs/validation/html/session_detail.png) |
+| practice\templates\practice\session_form.html |[session_form](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/session_form.html) | ![screenshot](docs/validation/html/session_form.png) |
+
+
+
+
+
+### CSS-validation
+
+[CSS Jigsaw Validator](https://jigsaw.w3.org/css-validator) was used to validate the custom stylesheet.
+
+| Directory | File | Screenshot |
+| --- | --- | --- |
+| static\css\style.css | [style.css](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/static/css/style.css) | ![screenshot](docs/validation/css/css.png) |
+
+### JShint
+
+[JShint Validator](https://jshint.com/) was used to validate JavaScript scripts.
+
+| Directory | File | Screenshot |
+| --- | --- | --- |
+| static\js\goal_form.js | [goal_form.js](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/static/js/goal_form.js) | ![screenshot](docs/validation/js/goal_form.png) |
+| static\js\session_form.js | [session_form.js](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/static/js/session_form.js) | ![screenshot](docs/validation/js/session_form.png) |
+
+### Validator Testing
+
+- **PEP8** compliance ensured using flake8 extension for VScode
+
+## Accessibility
+
+| Page | File | Screenshot |
+| --- | --- | --- |
+| accounts\templates\accounts\login.html | [login](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/login.html) | ![screenshot](docs/validation/html/login.png) |
+| accounts\templates\accounts\profile.html | [profile](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/profile.html) | ![screenshot](docs/validation/html/profile.png) |
+| accounts\templates\accounts\register.html | [register](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/register.html) | ![screenshot](docs/validation/html/register.png) |
+| practice\templates\practice\about.html | [about](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/about.html) | ![screenshot](docs/validation/html/about.png) |
+| practice\templates\practice\dashboard.html |[dashboard](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/dashboard.html) | ![screenshot](docs/validation/html/dashboard.png) |
+| practice\templates\practice\goal_detail.html |[goal_detail](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/goal_detail.html) | ![screenshot](docs/validation/html/goal_detail.png) |
+| practice\templates\practice\goal_form.html |[goal_form](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/goal_form.html) | ![screenshot](docs/validation/html/goal_form.png) |
+| practice\templates\practice\home.html |[home](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/home.html) | ![screenshot](docs/validation/html/home.png) |
+| practice\templates\practice\session_detail.html |[session_detail](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/session_detail.html) | ![screenshot](docs/validation/html/session_detail.png) |
+| practice\templates\practice\session_form.html |[session_form](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/session_form.html) | ![screenshot](docs/validation/html/session_form.png) |
+
+
+## Performance
+
+| Page | File | Screenshot |
+| --- | --- | --- |
+| accounts\templates\accounts\login.html | [login](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/login.html) | ![screenshot](docs/validation/html/login.png) |
+| accounts\templates\accounts\profile.html | [profile](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/profile.html) | ![screenshot](docs/validation/html/profile.png) |
+| accounts\templates\accounts\register.html | [register](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/register.html) | ![screenshot](docs/validation/html/register.png) |
+| practice\templates\practice\about.html | [about](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/about.html) | ![screenshot](docs/validation/html/about.png) |
+| practice\templates\practice\dashboard.html |[dashboard](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/dashboard.html) | ![screenshot](docs/validation/html/dashboard.png) |
+| practice\templates\practice\goal_detail.html |[goal_detail](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/goal_detail.html) | ![screenshot](docs/validation/html/goal_detail.png) |
+| practice\templates\practice\goal_form.html |[goal_form](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/goal_form.html) | ![screenshot](docs/validation/html/goal_form.png) |
+| practice\templates\practice\home.html |[home](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/home.html) | ![screenshot](docs/validation/html/home.png) |
+| practice\templates\practice\session_detail.html |[session_detail](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/session_detail.html) | ![screenshot](docs/validation/html/session_detail.png) |
+| practice\templates\practice\session_form.html |[session_form](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/session_form.html) | ![screenshot](docs/validation/html/session_form.png) |
+
+
+### Performing tests on various devices
+The pages were testet on:
+- Desktop pc
+- Samsung Galaxy A52
+- Samsung Galaxy A...
+- Kindle fire tablet
+
+### Browser compatibility
+
+- Mozilla Firefox
+- Google Chrome
+- Microsoft Edge
+
+### Testing user stories
+
+1. As a first-time visitor, I want to understand what the shop offers so I can figure out if you build the kind of guitar I’m looking for.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| hero-image  | On home page, look at hero-image | hero image gives impression of workshop | Works as expected |
+| Custom-guitar-section | On home page, scroll down to custom-guitar-section | I learn about custom-guitar-service | Works as expected |
+| Signature-guitar-section | On home page, scroll down to Signature-guitar-section | I learn about Signature-guitar-service | Works as expected |
+| Customization-section | On home page, scroll down to customization-section | I learn about customization-service | Works as expected |
+| Guitar-setup-section | On home page, scroll down to guitar-setup-section | I learn about guitar-setup-service | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/user-stories/userstory-1-1of5.png">
+
 </details>
 
