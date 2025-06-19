@@ -38,7 +38,6 @@ ALLOWED_HOSTS = [
     'https://guitar-practice-tracker-6ddb606e64f7.herokuapp.com/',
 ]
 
-X_FRAME_OPTIONS = 'ALLOWALL'
 
 CSRF_TRUSTED_ORIGINS = ['https://www.heroku.com/']
 
@@ -158,3 +157,6 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+X_FRAME_OPTIONS = 'ALLOWALL'
