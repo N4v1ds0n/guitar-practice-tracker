@@ -192,7 +192,6 @@ View of the Board:
 
 </details>
 
-
 ## Design
 
 ### Colours
@@ -376,7 +375,8 @@ The wireframes were created using Balsamiq
         Register - via Navbar (if logged out)
     
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/navigation.png">
+<img src="docs/features/navigation2.png">
 </details>
 
 
@@ -389,7 +389,7 @@ The wireframes were created using Balsamiq
     - Mobile-friendly layout
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/footer.png">
 </details>
 
 ### Page Styling
@@ -399,7 +399,7 @@ The wireframes were created using Balsamiq
     - Messages framework support for user feedback
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/logout.png">
 </details>
 
 ### User Features
@@ -407,13 +407,15 @@ The wireframes were created using Balsamiq
     User registration with username, email, password
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/userregistration.png">
+<img src="docs/features/userregistrationsuccess.png">
 </details>
 
     User authentication (login/logout)
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/userlogin.png">
+<img src="docs/features/userloginsuccess.png">
 </details>
 
     User profile page:
@@ -424,7 +426,7 @@ The wireframes were created using Balsamiq
         - Delete account with confirmation
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/">
 </details>
 
 
@@ -670,26 +672,71 @@ Practice Session Management
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| hero-image  | On home page, look at hero-image | hero image gives impression of workshop | Works as expected |
-| Custom-guitar-section | On home page, scroll down to custom-guitar-section | I learn about custom-guitar-service | Works as expected |
-| Signature-guitar-section | On home page, scroll down to Signature-guitar-section | I learn about Signature-guitar-service | Works as expected |
-| Customization-section | On home page, scroll down to customization-section | I learn about customization-service | Works as expected |
-| Guitar-setup-section | On home page, scroll down to guitar-setup-section | I learn about guitar-setup-service | Works as expected |
+| register  | On home page, click register, enter credentials | get redirected to users neew dashboard | Works as expected |
 
 <details><summary>Screenshots</summary>
-<img src="docs/user-stories/userstory-1-1of5.png">
+<img src="docs/testing/user-stories/userstory2.png">
+<img src="docs/testing/user-stories/userstory2_1.png">
 
 </details>
 
 2. 	I want to log into my account so I can access my private dashboard and practice data. 
 
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| login  | On home page, click login, enter credentials | get redirected to users dashboard | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory1.png">
+<img src="docs/testing/user-stories/userstory1_1.png">
+<img src="docs/testing/user-stories/userstory1_2.png">
+
+</details>
+
 3. 	I want to log out easily so I can ensure my data is not accessible to others.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| logout  | While logged in, click logout | get redirected home page | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory3.png">
+<img src="docs/testing/user-stories/userstory3_1.png">
+
+</details>
 
 4. 	I want to navigate the site freely and explore all the features
 
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| navbar  | use the navbar to navigate between pages | get to all pages | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory4.png">
+<img src="docs/testing/user-stories/userstory4_1.png">
+<img src="docs/testing/user-stories/userstory4_2.png">
+<img src="docs/testing/user-stories/userstory4_3.png">
+
+</details>
+
 5. 	I want to view an overview of my goals on the dashboard so I can stay focused on my current practice priorities.
 
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| dashboard  | go to dashboard | see list of goals that have been created | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory5.png">
+
 6. 	I want to create a new goal so I can stay focused on my current practice priorities.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| dashboard  | go to dashboard | see list of goals that have been created | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory5.png">
 
 7. 	I want to select a goal type so I can define what I want to work on
 
@@ -753,3 +800,31 @@ The pages were testet on:
 - Google Chrome
 - Microsoft Edge
 
+
+
+## Deployment
+
+Deployed to [Heroku](https://heroku.com) using Code Institute’s Python Essentials terminal template.
+
+**Steps to deploy:**
+1. Create a Heroku account (if not already existing)
+2. Create a new app with Heroku
+<details><summary>Screenshots</summary>
+<img src="docs/deploy/deployment-1.png">
+<img src="docs/deploy/deployment-2.png">
+</details>
+
+4. Allowing Heroku access to GitHub, link the new app to the relevant repository
+<details><summary>Screenshots</summary>
+<img src="docs/deploy/deployment-5.png">
+<img src="docs/deploy/deployment-6.png">
+<img src="docs/deploy/deployment-7.png">
+</details>
+
+5. Choose whether or not to enable Automatic Deploys. If enabled, the deployed app will update automatically with each push to GitHub
+
+<details><summary>Screenshots</summary>
+<img src="docs/deploy/deployment-8.png">
+</details>
+
+6. Click Deploy
