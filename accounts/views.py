@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, ProfileForm
 
 # Create your views here.
 
@@ -35,7 +35,7 @@ def profile(request):
     user = request.user
 
     if request.method == 'POST':
-        profile_form = CustomUserChangeForm(request.POST, instance=user)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=user)
         password_form = PasswordChangeForm(user, request.POST)
 
         if 'update_profile' in request.POST and profile_form.is_valid():
@@ -53,7 +53,7 @@ def profile(request):
             messages.error(request, 'Please correct the errors below.')
 
     else:
-        profile_form = CustomUserChangeForm(instance=user)
+        profile_form = ProfileForm(instance=user)
         password_form = PasswordChangeForm(user)
 
     return render(request, 'accounts/profile.html', {
