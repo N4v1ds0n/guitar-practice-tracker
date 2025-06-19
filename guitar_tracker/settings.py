@@ -38,6 +38,7 @@ ALLOWED_HOSTS = [
     'https://guitar-practice-tracker-6ddb606e64f7.herokuapp.com/',
 ]
 
+X_FRAME_OPTIONS = 'ALLOWALL'
 
 CSRF_TRUSTED_ORIGINS = ['https://www.heroku.com/']
 
