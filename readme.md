@@ -9,7 +9,7 @@
 
 **Developer: Damian Droste**
 
-💻 [Visit live website](https://<deploymentname>.herokuapp.com/)  
+💻 [Visit live website](https://guitar-practice-tracker-6ddb606e64f7.herokuapp.com)  
 (Ctrl + click to open in new tab)
 
 
@@ -120,31 +120,31 @@ goals and provides detailed session logging, progress tracking, and user profile
 
 9. 	I want to log a practice session so I can track the time I’ve spent and key metrics 
 
-10. 	I want the session form to adjust to the selected goal type so irrelevant input fields are hidden
+10. I want the session form to adjust to the selected goal type so irrelevant input fields are hidden
 
-11. 	I want to view a list of all my past practice sessions so I can reflect on what I’ve done so far.
+11. I want to view a list of all my past practice sessions so I can reflect on what I’ve done so far.
 
-12. 	I want to link sessions to a specific goal so I can see my work in the context of a particular objective.
+12. I want to link sessions to a specific goal so I can see my work in the context of a particular objective.
 
 13.	I want to edit a goal or a session after creating it so I can fix mistakes or adjust targets.
 
-14. 	I want to delete goals and sessions so I can clean up outdated or irrelevant data.
+14. I want to delete goals and sessions so I can clean up outdated or irrelevant data.
 
 15.	I want to see my profile and update basic details like username and email so I stay in control of my account.
 
-16. 	I want to upload or change a profile picture so my account feels more personal.
+16. I want to upload or change a profile picture so my account feels more personal.
 
-17. 	I want to delete my account so I can remove my data completely if I no longer want to use the app.
+17. I want to delete my account so I can remove my data completely if I no longer want to use the app.
 
 
 
 ### Admin / Authorised User
 
-18. 	I want to create and manage standard goal definitions so users have access to pre-built, structured goal templates.
+18. I want to create and manage standard goal definitions so users have access to pre-built, structured goal templates.
 
 19.	I want to view all registered users through the Django admin panel so I can monitor usage and manage inappropriate or inactive accounts.
 
-20. 	I want to make certain fields required or optional at the model level so data integrity is preserved throughout the app.
+20. I want to make certain fields required or optional at the model level so data integrity is preserved throughout the app.
 
 21.	I want to test all user flows and forms directly in the admin panel so I can quickly identify and resolve edge cases or bugs.
 
@@ -154,13 +154,13 @@ goals and provides detailed session logging, progress tracking, and user profile
 
 22.	I want to deploy the project in a maintainable and scalable way so it can be hosted on a platform like Heroku or Render with minimal downtime.
 
-23. 	I want to structure the code with reusable components so future features like progress charts or notifications can be added easily.
+23. I want to structure the code with reusable components so future features like progress charts or notifications can be added easily.
 
-24. 	I want to include documentation (like this README) so other developers can understand and contribute to the project easily.
+24. I want to include documentation (like this README) so other developers can understand and contribute to the project easily.
 
-25. 	I want to integrate basic accessibility and responsive design best practices so the app is usable across devices and for users with diverse needs.  
+25. I want to integrate basic accessibility and responsive design best practices so the app is usable across devices and for users with diverse needs.  
 
-26. 	As a Site Owner I can edit data entered into my site so that all submitted data is maintained to avoid errors
+26. As a Site Owner I can edit data entered into my site so that all submitted data is maintained to avoid errors
 
 
 ### Kanban, Epics & User Stories
@@ -168,33 +168,31 @@ goals and provides detailed session logging, progress tracking, and user profile
 - Epics were created using the milestones feature
 - Backlog, In Progress, Done headings were used in a board
 
+<details>
 
-![Epics](docs/github_project/closedepics.png)
-![Epic 1](docs/github_project/EPIC1.png)
-![Epic 2](docs/github_project/EPIC2.png)
-![Epic 3](docs/github_project/EPIC3.png)
-![Epic 4](docs/github_project/EPIC4.png)
-![Epic 5](docs/github_project/EPIC5.png)
-![Epic 6](docs/github_project/EPIC6.png)
-![Epic 7 (closed items)](docs/github_project/EPIC7.1..png)
-![Epics 7 (open items)](docs/github_project/EPIC7.2..png)
+![Epics](docs/gitproject/closedepics.png)
+![Epic 1](docs/gitproject/EPIC1.png)
+![Epic 2](docs/gitproject/EPIC2.png)
+![Epic 3](docs/gitproject/EPIC3.png)
+![Epic 4](docs/gitproject/EPIC4.png)
+![Epic 5](docs/gitproject/EPIC5.png)
+![Epic 6](docs/gitproject/EPIC6.png)
+![Epic 7 (closed items)](docs/gitproject/EPIC7_1.png)
+![Epics 7 (open items)](docs/gitproject/EPIC7_2.png)
 
 Section for future endeavours:
 
-<img src="docs/github-project/openepics.png">
-open Epics
-<img src="docs/github-project/EPIC8.png">
-Epic 8
+![open Epics](docs/gitproject/openepics.png)
+![Epic 8](docs/gitproject/EPIC8.png)
 
 
-<details><summary>User Stories</summary>
-    <img src="docs/github-project/userstories.png">
-    User Stories
-</details>
+User Stories
 
-<details><summary>Kanban</summary>
-<img src="docs/github-project/userstories.png" alt="User Stories">
+![user stories]("docs/gitproject/userstories.png")
+
 View of the Board
+
+<img src="docs/gitproject/kanbanboard.png">
 </details>
 
 ## Design
@@ -204,8 +202,10 @@ View of the Board
 I chose warm and and vintage colours while maintaining a modern design. I wanted the app to look like a modern offspring of my custom guitar shop which uses the same colour palette. 
 
 The colors I wanted to stay close to  [Coolors.co](https://coolors.co/)
-<details><summary>See colour pallet</summary>
-<img src="docs\design\color-palettte.png">
+
+<details>
+    <summary>See colour pallet</summary>
+    <img src="docs/design/color-palettte.png">
 </details>
 
 ### Fonts
@@ -254,7 +254,7 @@ if you created a practice session or clicked a it from your list on the dashboar
 - Below find a diagramm showing all the models and connections
 
 <details><summary>Show diagram</summary>
-<img src="docs\erd\guitar_practice_tracker_erd.png">
+<img src="docs/erd/guitar_practice_tracker_erd.png">
 </details>
 
 ##### Models

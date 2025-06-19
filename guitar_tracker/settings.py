@@ -34,8 +34,12 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'herokuapp.com',
-    '.herokuapp.com'
+    '.herokuapp.com',
+    'https://guitar-practice-tracker-6ddb606e64f7.herokuapp.com/',
 ]
+
+
+CSRF_TRUSTED_ORIGINS = ['https://www.heroku.com/']
 
 MESSAGE_TAGS = {
     messages.SUCCESS: 'success',
