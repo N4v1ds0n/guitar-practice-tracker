@@ -21,3 +21,4 @@ def delete_user_photo(sender, instance, **kwargs):
     if instance.photo:
         public_id = instance.photo.name.rsplit('.', 1)[0]
         destroy(public_id)
+    
