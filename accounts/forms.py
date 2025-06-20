@@ -1,4 +1,5 @@
 from django import forms
+from cloudinary.uploader import destroy
 from django.contrib.auth.forms import (
     UserCreationForm,
     UserChangeForm,
@@ -47,7 +48,8 @@ class ProfileForm(forms.ModelForm):
             old_user = CustomUser.objects.get(pk=user.pk)
             old_photo = old_user.photo
             if old_photo and old_photo != self.cleaned_data['photo']:
-                old_photo.delete(save=False)
+                public_id = old_photo.name.rsplit('.', 1)[0]  # Remove file extension
+                destroy(public_id)
         if commit:
             user.save()
         return user
