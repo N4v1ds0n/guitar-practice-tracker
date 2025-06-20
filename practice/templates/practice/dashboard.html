@@ -1,8 +1,15 @@
 {% extends "base.html" %}
+{% load static %}
+
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
 <div class="container">
+  {% if user.photo %}
+    <img src="{{ user.photo.url }}" alt="Profile photo" class="profile-img">
+  {% else %}
+    <img src="{% static 'images/user_images/default.jpg' %}" alt="Default profile photo" class="profile-img">
+  {% endif %}
   <h1>Welcome, {{ user.username }}!</h1>
   <p>This is your practice dashboard 🎸</p>
 

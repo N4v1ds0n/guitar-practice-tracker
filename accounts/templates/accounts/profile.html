@@ -3,7 +3,7 @@
 {% block content %}
   <div class="profile-container">
     <h2>Edit Profile</h2>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ profile_form.as_p }}
       <button type="submit" class="button" name="update_profile">Update Profile</button>

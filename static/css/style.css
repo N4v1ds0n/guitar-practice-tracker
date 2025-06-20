@@ -194,6 +194,11 @@ form p .helptext {
   margin-top: 0.25rem;
 }
 
+/* hide clear button for profile picture */
+#photo-clear_id {
+    display: none;
+}
+
 /* Dashboard */
 
 .dashboard-sections {
@@ -211,6 +216,13 @@ form p .helptext {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.profile-img {
+  max-width: 150px;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 /* dashboard List Styles */

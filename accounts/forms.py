@@ -40,3 +40,14 @@ class ProfileForm(forms.ModelForm):
             if not photo.content_type.startswith("image/"):
                 raise forms.ValidationError("Invalid file type. Upload an image.")
         return photo
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if self.cleaned_data.get('photo'):
+            old_user = CustomUser.objects.get(pk=user.pk)
+            old_photo = old_user.photo
+            if old_photo and old_photo != self.cleaned_data['photo']:
+                old_photo.delete(save=False)
+        if commit:
+            user.save()
+        return user

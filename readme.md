@@ -316,9 +316,11 @@ target_duration | PositiveIntegerField | Optional. Target total minutes of pract
 
 
 ### Wireframes
-The wireframes were created using Balsamiq
-<details><summary></summary>
-<img src="">
+The wireframes were created by hand
+<details><summary>Wireframes</summary>
+<img src="docs/wireframes/wireframes-1.png">
+<img src="docs/wireframes/wireframes-2.png">
+<img src="docs/wireframes/wireframes-3.png">
 </details>
 
 ## Technologies Used
@@ -446,7 +448,10 @@ Goal Management
         Fields change based on selected goal type
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/creategoal.png">
+<img src="docs/features/creategoal-types.png">
+<img src="docs/features/creategoal-types-adjusted.png">
+
 </details>
 
     Standard goal selection:
@@ -456,7 +461,9 @@ Goal Management
         Filtered dropdown based on selected goal type
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/creategoal-standard.png">
+<img src="docs/features/creategoal-standard-picked.png">
+
 </details>
 
     Edit goals:
@@ -468,7 +475,12 @@ Goal Management
         With user confirmation
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/goaledit.png">
+<img src="docs/features/goaledit-form.png">
+<img src="docs/features/goaledit-mess.png">
+<img src="docs/features/goaldelet-btn.png">
+<img src="docs/features/goaldelete-warn.png">
+<img src="docs/features/goaldelete-mess.png">
 </details>
 
     Optional target metrics:
@@ -477,7 +489,7 @@ Goal Management
         - Target date
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/goalmetrics.png">
 </details>
 
     Goal detail page:
@@ -487,7 +499,7 @@ Goal Management
         - log a session for that goal
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/goaldetail.png">
 </details>
 
 Practice Session Management
@@ -503,7 +515,7 @@ Practice Session Management
         - Notes
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/practiceform.png">
 </details>
 
 
@@ -513,13 +525,18 @@ Practice Session Management
 
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/practiceform-adjusted.png">
 </details>
 
     Edit & delete practice sessions
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/practiceedit-btn.png">
+<img src="docs/features/practiceedit-form.png">
+<img src="docs/features/practiceedit-mss.png">
+<img src="docs/features/practicedelete-btn.png">
+<img src="docs/features/practicedelete-warn.png">
+<img src="docs/features/practicedelete-mess.png">
 </details>
 
 
@@ -531,20 +548,21 @@ Practice Session Management
         List of active goals
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/goallist.png">
 </details>
 
         View list of past sessions
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/sessionlist.png">
 </details>
 
         View sessions linked to specific goal
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/linkedsess.png">
 </details>
+
 
 
 🔐 Security & Validation
@@ -558,7 +576,8 @@ Practice Session Management
         Custom form logic for goal type-specific required fields
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/practiceform-adjusted.png">
+<img src="docs/features/creategoal-types-adjusted.png">
 </details>
 
     Email & username uniqueness enforced
@@ -567,8 +586,6 @@ Practice Session Management
 <details><summary>Screenshots</summary>
 <img src="docs\design\color-palettte.png">
 </details>
-
-    Image upload security via Pillow
 
 🛠️ Admin Features
 
@@ -582,8 +599,16 @@ Practice Session Management
         - Standard Goal Templates
 
 <details><summary>Screenshots</summary>
-<img src="docs\design\color-palettte.png">
+<img src="docs/features/adminview.png">
+<img src="docs/features/adminview-users.png">
+<img src="docs/features/adminview-users-goals.png">
+<img src="docs/features/adminview-standard-goals.png">
+<img src="docs/features/adminview-users-practice.png">
+<img src="docs/features/adminview-standard-goals-create.png">
+
+
 </details>
+
 
 ## Validation
 
@@ -605,6 +630,8 @@ Practice Session Management
 | practice\templates\practice\home.html |[home](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/home.html) | ![screenshot](docs/validation/html/home.png) |
 | practice\templates\practice\session_detail.html |[session_detail](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/session_detail.html) | ![screenshot](docs/validation/html/session_detail.png) |
 | practice\templates\practice\session_form.html |[session_form](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/practice/templates/practice/session_form.html) | ![screenshot](docs/validation/html/session_form.png) |
+| Directory | File | Screenshot |
+| templates\accounts\login.html | [login](https://github.com/n4v1ds0n/guitar-practice-tracker/blob/main/accounts/templates/accounts/login.html) | ![screenshot](docs/validation/html/login.png) |
 
 
 
@@ -729,36 +756,178 @@ Practice Session Management
 <details><summary>Screenshots</summary>
 <img src="docs/testing/user-stories/userstory5.png">
 
+</details>
+
 6. 	I want to create a new goal so I can stay focused on my current practice priorities.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| dashboard  | go to dashboard | see list of goals that have been created | Works as expected |
+| goal form  | go to dashboard, click add goal, enter specifics(pick standard goal if you like), click  save goal |get redirected to dashboard with new goal | Works as expected |
 
 <details><summary>Screenshots</summary>
-<img src="docs/testing/user-stories/userstory5.png">
+<img src="docs/testing/user-stories/userstory6.png">
+<img src="docs/testing/user-stories/userstory6_1.png">
+<img src="docs/testing/user-stories/userstory6_2.png">
+
+</details>
 
 7. 	I want to select a goal type so I can define what I want to work on
 
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| goal form  | go to dashboard, click add goal, enter specifics (pick a goal type), click  save goal |get redirected to dashboard with new goal | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory7.png">
+<img src="docs/testing/user-stories/userstory7_1.png">
+<img src="docs/testing/user-stories/userstory7_2.png">
+<img src="docs/testing/user-stories/userstory7_3.png">
+
+</details>
+
 8. 	I want to autofill a goal from a predefined list of standard goals so the app tailors the required input fields accordingly
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| goal form  | go to dashboard, click add goal, choose a goal type othe than custom, pick a standard goal from dropdon, add metrics if you like, click  save goal |get redirected to dashboard with new goal | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory8.png">
+<img src="docs/testing/user-stories/userstory8_1.png">
+<img src="docs/testing/user-stories/userstory8_2.png">
+<img src="docs/testing/user-stories/userstory8_3.png">
+
+</details>
 
 9. 	I want to log a practice session so I can track the time I’ve spent and key metrics 
 
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| session form  | go to dashboard, click log practice, enter specifics, click  save session |get redirected to dashboard with new session | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory9.png">
+<img src="docs/testing/user-stories/userstory9_1.png">
+<img src="docs/testing/user-stories/userstory9_2.png">
+
+</details>
+
 10. 	I want the session form to adjust to the selected goal type so irrelevant input fields are hidden
 
-11. 	I want to view a list of all my past practice sessions so I can reflect on what I’ve done so far.
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| session form  | go to dashboard, click log practice, pick goal to link  | if the goal is repertoire or routine, metrics fiels wll hide | Works as expected |
 
-12. 	I want to link sessions to a specific goal so I can see my work in the context of a particular objective.
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory10.png">
+<img src="docs/testing/user-stories/userstory10_1.png">
+<img src="docs/testing/user-stories/userstory10_2.png">
 
-13.	I want to edit a goal or a session after creating it so I can fix mistakes or adjust targets.
+</details>
 
-14. 	I want to delete goals and sessions so I can clean up outdated or irrelevant data.
+11. I want to view a list of all my past practice sessions so I can reflect on what I’ve done so far.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| dashboard  | go to dashboard | see list of sessions that have been created | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory11.png">
+
+</details>
+
+12. I want to link sessions to a specific goal so I can see my work in the context of a particular objective.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| session form  | go to dashboard, click log practice, pick goal to link, enter what you want to log, save session | session will apear in list with linked goal next to it | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory12.png">
+<img src="docs/testing/user-stories/userstory12_1.png">
+<img src="docs/testing/user-stories/userstory12_2.png">
+
+</details>
+
+13.	I want to edit a goal/session after creating it so I can fix mistakes or adjust targets.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| goal/session detail  | go to dashboard, click on details next to goal or a session, in detail view click edit, enter what you want to change, save session | goal/session will return to detail view with changes added | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory13.png">
+<img src="docs/testing/user-stories/userstory13_1.png">
+<img src="docs/testing/user-stories/userstory13_2.png">
+<img src="docs/testing/user-stories/userstory13_3.png">
+<img src="docs/testing/user-stories/userstory13_4.png">
+<img src="docs/testing/user-stories/userstory13_5.png">
+<img src="docs/testing/user-stories/userstory13_6.png">
+
+</details>
+
+
+14. I want to delete goals and sessions so I can clean up outdated or irrelevant data.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| goal/session detail  | go to dashboard, click on details next to goal or a session, in detail view click delete, confirm | goal/session will be deleted and user be redirected to dashboard | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory14.png">
+<img src="docs/testing/user-stories/userstory14_1.png">
+<img src="docs/testing/user-stories/userstory14_2.png">
+<img src="docs/testing/user-stories/userstory14_3.png">
+<img src="docs/testing/user-stories/userstory14_4.png">
+<img src="docs/testing/user-stories/userstory14_5.png">
+<img src="docs/testing/user-stories/userstory14_6.png">
+
+</details>
 
 15.	I want to see my profile and update basic details like username and email so I stay in control of my account.
 
-16. 	I want to upload or change a profile picture so my account feels more personal.
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| profile  | go to profile, edit what you like and confirm | goal/session will be deleted and user be redirected to dashboard | Works as expected |
 
-17. 	I want to delete my account so I can remove my data completely if I no longer want to use the app.
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory14.png">
+<img src="docs/testing/user-stories/userstory14_1.png">
+<img src="docs/testing/user-stories/userstory14_2.png">
+<img src="docs/testing/user-stories/userstory14_3.png">
+<img src="docs/testing/user-stories/userstory14_4.png">
+<img src="docs/testing/user-stories/userstory14_5.png">
+<img src="docs/testing/user-stories/userstory14_6.png">
+
+</details>
+
+16. I want to change my password so my account stays safe.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| profile  | go to profile, enter old and new password, confirm password and click change password | password will be changed and user recieves a message | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory16.png">
+<img src="docs/testing/user-stories/userstory16_1.png">
+<img src="docs/testing/user-stories/userstory16_2.png">
+
+</details>
+
+17. I want to delete my account so I can remove my data completely if I no longer want to use the app.
+
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| profile  | go to profile, click delete button, confirm deletion | profile will be deleted and user be redirected to home with message | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory17.png">
+<img src="docs/testing/user-stories/userstory17_1.png">
+<img src="docs/testing/user-stories/userstory17_2.png">
+
+
+</details>
 
 
 
@@ -766,11 +935,47 @@ Practice Session Management
 
 18. 	I want to create and manage standard goal definitions so users have access to pre-built, structured goal templates.
 
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| admin view  | go into the admin view, click standard goal definitions | you will be redirected to a list of all standard goal definitions with add, edit and delete options  | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory18.png">
+<img src="docs/testing/user-stories/userstory18_1.png">
+<img src="docs/testing/user-stories/userstory18_2.png">
+
+</details>
+
 19.	I want to view all registered users through the Django admin panel so I can monitor usage and manage inappropriate or inactive accounts.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| admin view  | go into the admin view, click on users | list of users with view, edit and delete options will appear | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory19.png">
+<img src="docs/testing/user-stories/userstory19_1.png">
+
+</details>
 
 20. 	I want to make certain fields required or optional at the model level so data integrity is preserved throughout the app.
 
+See Data Model section for a detailed info on fields that have been made required or otional.
+
 21.	I want to test all user flows and forms directly in the admin panel so I can quickly identify and resolve edge cases or bugs.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| admin view  | go into the admin view, on the add button next to all the model representations |  you can check the user flow for each data addition process  | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory21.png">
+<img src="docs/testing/user-stories/userstory21_1.png">
+<img src="docs/testing/user-stories/userstory21_2.png">
+
+</details>
+
+
 
 
 
@@ -778,13 +983,38 @@ Practice Session Management
 
 22.	I want to deploy the project in a maintainable and scalable way so it can be hosted on a platform like Heroku or Render with minimal downtime.
 
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| repository  | the defining files in the repository have been prepared and adjusted to ensure a flawless build in a heroku environment |  app builds on heroku without issues  | Works as expected |
+
 23. 	I want to structure the code with reusable components so future features like progress charts or notifications can be added easily.
 
 24. 	I want to include documentation (like this README) so other developers can understand and contribute to the project easily.
 
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| readme  | check readme files for all info considering this project |  you can navigate the readme by topic and receive detailed views of all features and requirements  | Works as expected |
+
 25. 	I want to integrate basic accessibility and responsive design best practices so the app is usable across devices and for users with diverse needs.  
 
+See validation Accessibility
+
 26. 	As a Site Owner I can edit data entered into my site so that all submitted data is maintained to avoid errors
+
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| admin view  | go into the admin view, click any the model representation |  you can access each database with add, edit and delete options | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-stories/userstory26.png">
+<img src="docs/testing/user-stories/userstory26_1.png">
+<img src="docs/testing/user-stories/userstory26_2.png">
+<img src="docs/testing/user-stories/userstory26_3.png">
+
+</details>
+
+
 
 
 ### Performing tests on various devices
