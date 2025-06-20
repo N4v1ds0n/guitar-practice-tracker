@@ -6,6 +6,7 @@ from django.contrib.auth.forms import (
     AuthenticationForm
 )
 from .models import CustomUser
+import os
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -50,12 +51,13 @@ class ProfileForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        # if self.cleaned_data.get('photo'):
-        #    old_user = CustomUser.objects.get(pk=user.pk)
-        #    old_photo = old_user.photo
-        #    if old_photo and old_photo != self.cleaned_data['photo']:
-        #        public_id = old_photo.name.rsplit('.', 1)[0]
-        #        destroy(public_id)
+        if self.cleaned_data.get('photo'):
+            old_user = CustomUser.objects.get(pk=user.pk)
+            old_photo = old_user.photo
+            new_photo = self.cleaned_data['photo']
+            if old_photo and old_photo != new_photo:
+                if hasattr(old_photo, 'path') and os.path.isfile(old_photo.path):
+                    old_photo.delete(save=False)
         if commit:
             user.save()
         return user
