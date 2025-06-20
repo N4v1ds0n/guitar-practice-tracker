@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from .forms import CustomUserCreationForm, CustomUserChangeForm, ProfileForm
+from .forms import CustomUserCreationForm, ProfileForm
 
 # Create your views here.
 
@@ -60,6 +60,7 @@ def profile(request):
         'profile_form': profile_form,
         'password_form': password_form,
     })
+
 
 @login_required
 def delete_account(request):

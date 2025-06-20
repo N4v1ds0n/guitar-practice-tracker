@@ -6,7 +6,9 @@ from django.dispatch import receiver
 
 # Create your models here.
 
+
 def user_photo_path(instance, filename):
+    '''Generate a path for user photos based on username'''
     return f'user_images/{instance.username}/{filename}'
 
 
@@ -16,9 +18,10 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
 
+
 @receiver(post_delete, sender=CustomUser)
 def delete_user_photo(sender, instance, **kwargs):
+    '''Delete user photo from Cloudinary when user is deleted'''
     if instance.photo:
         public_id = instance.photo.name.rsplit('.', 1)[0]
         destroy(public_id)
-    

@@ -4,7 +4,6 @@ from . import views
 from .forms import CustomAuthenticationForm
 
 
-
 urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(
@@ -18,4 +17,3 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('account/delete/', views.delete_account, name='delete_account'),
 ]
-
