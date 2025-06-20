@@ -14,6 +14,7 @@ from pathlib import Path
 from django.contrib.messages import constants as messages
 import dj_database_url
 import os
+
 if os.path.isfile('env.py'):
     import env
 
@@ -110,8 +111,10 @@ DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Password validation
