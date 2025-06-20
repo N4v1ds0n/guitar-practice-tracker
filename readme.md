@@ -1037,9 +1037,13 @@ The pages were testet on:
 
 | **Bug** | **Fix** |
 | ------- | ------- |
+| could not test practice form behaviour with standard goals, because not enough standard goals | created more goal types and added more standard goals |
 | styles.css did not load in some of the templates | Made sure to add the "load static" code at the top |
+| could not implement standard goal conditions for goal and practice forms with modesl and views alone | used javascript to implement the functionality |
 |styles and scripts did not render in local env | set debug in settings back to "TRUE" while coding |
 |practice session form was not able to retrieve goal_type data | added an api to provide the data for specific design |
+|Photo upload function caused problems with heroku platform and returned a 500 | removed the functionality for now and plan to get back to it later |
+|
 
 
 ##### Back to [top](#table-of-contents)<hr>
