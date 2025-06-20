@@ -31,7 +31,6 @@
   - [Validation](#validation)
   - [Testing](#testing)
     - [Manual testing](#manual-testing)
-    - [Automated testing](#automated-testing)
     - [Tests on various devices](#tests-on-various-devices)
     - [Browser compatibility](#browser-compatibility)
   - [Bugs](#bugs)
