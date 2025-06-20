@@ -337,7 +337,6 @@ The wireframes were created by hand
 ### Libraries & Tools
 
 - [Am I Responsive](http://ami.responsivedesign.is/)
-- [Balsamiq](https://balsamiq.com/)
 - [Bootstrap v5.2](https://getbootstrap.com/)
 - [Cloudinary](https://cloudinary.com/)
 - [Favicon.io](https://favicon.io)
@@ -615,6 +614,7 @@ Practice Session Management
 ### HTML Validation (W3C)
 
 ### HTML-validation
+- the error pages 403.html, 404.htm and 500.html are virtually derivates of the home page and return the same results as home.html
 
 [HTML W3C Validator](https://validator.w3.org) was used to validate html pages I am not providing aspecific Url, since the site is not static:
 
@@ -1031,10 +1031,24 @@ The pages were testet on:
 - Microsoft Edge
 
 
+##### Back to [top](#table-of-contents)<hr>
 
-## Deployment
+## Bugs
 
-Deployed to [Heroku](https://heroku.com) using Code Institute’s Python Essentials terminal template.
+| **Bug** | **Fix** |
+| ------- | ------- |
+| styles.css did not load in some of the templates | Made sure to add the "load static" code at the top |
+|styles and scripts did not render in local env | set debug in settings back to "TRUE" while coding |
+|practice session form was not able to retrieve goal_type data | added an api to provide the data for specific design |
+
+
+##### Back to [top](#table-of-contents)<hr>
+
+### Heroku Deployment
+
+[Official Page](https://devcenter.heroku.com/articles/git) (Ctrl + click)
+
+TDeployed to [Heroku](https://heroku.com) using Code Institute’s Python Essentials terminal template.
 
 **Steps to deploy:**
 1. Create a Heroku account (if not already existing)
@@ -1057,111 +1071,31 @@ Deployed to [Heroku](https://heroku.com) using Code Institute’s Python Essenti
 <img src="docs/deploy/deployment-8.png">
 </details>
 
-6. Click Deploy
+6. Install the plugins dj-database-url and psycopg2-binary.
 
+7. Run pip3 freeze > requirements.txt so both are added to the requirements.txt file
 
+8. Create a Procfile with "web: gunicorn <your-app-name>.wsgi" as content
 
-##### Back to [top](#table-of-contents)<hr>
+9. Ensure debug is set to false in the settings.py file
 
-## Bugs
+7. Add localhost, and .herokuapp.com to the ALLOWED_HOSTS variable in settings.py
 
-| **Bug** | **Fix** |
-| ------- | ------- |
+8. Run "python manage.py showmigrations" to check the status of the migrations
 
+9. Run "python manage.py migrate" to migrate the database
 
-##### Back to [top](#table-of-contents)<hr>
+10. Run "python manage.py createsuperuser" to create a super/admin user
 
-### Heroku Deployment
+13. Install gunicorn and add it to the requirements.txt file using the command pip freeze > requirements.txt
 
-[Official Page](https://devcenter.heroku.com/articles/git) (Ctrl + click)
+14. Disable collectstatic in Heroku before any code is pushed putting a config variable of DISABLE_COLLECTSTATIC=1
 
-This application has been deployed from Github using Heroku. Here's how:
+15. Click on the view button below to access the application
 
-1. Create an account at heroku.com
-<details>
-<img src="">
-</details>
+16. If you are adding external databases to the app at any point be sure to add these secrets into new config vars, as you dont want to share the secrets in your code, but they need to be known to heroku.
 
-2. Create an app, give it a name (has to be a unique name, so you might need to work with numbers or abbreviations), and select a region
-<details>
-<img src="">
-<img src="">
-</details>
-
-3. Under resources search for postgres, and add a Postgres database to the app
-<details>
-<img src="">
-</details>
-
-Heroku Postgres
-
-1. Note the DATABASE_URL, this can be set as an environment variable in Heroku and your local deployment(env.py)
-<details>
-<img src="https://raw.githubusercontent.com/ArronBeale/CI_PP4_the_diplomat/main/docs/heroku/heroku-deployment-18.PNG">
-<img src="https://raw.githubusercontent.com/ArronBeale/CI_PP4_the_diplomat/main/docs/heroku/heroku-deployment-17.PNG">
-</details>
-
-2. Install the plugins dj-database-url and psycopg2-binary.
-
-3. Run pip3 freeze > requirements.txt so both are added to the requirements.txt file
-<details>
-<img src="https://raw.githubusercontent.com/ArronBeale/CI_PP4_the_diplomat/main/docs/heroku/heroku-deployment-05.PNG">
-</details>
-
-4. Create a Procfile with the text: web: gunicorn <your-app-name>.wsgi
-<details>
-<img src="https://raw.githubusercontent.com/ArronBeale/CI_PP4_the_diplomat/main/docs/heroku/heroku-deployment-06.PNG">
-</details>
-
-5. In the settings.py ensure the connection is to the Heroku postgres database, no indentation if you are not using a seperate test database.
-I store mine in env.py
-<details>
-<img src="https://raw.githubusercontent.com/ArronBeale/CI_PP4_the_diplomat/main/docs/heroku/heroku-deployment-07.PNG">
-<img src="https://raw.githubusercontent.com/ArronBeale/CI_PP4_the_diplomat/main/docs/heroku/heroku-deployment-08.PNG">
-</details>
-
-6. Ensure debug is set to false in the settings.py file
-<details>
-<img src="https://raw.githubusercontent.com/ArronBeale/CI_PP4_the_diplomat/main/docs/heroku/heroku-deployment-09.PNG">
-</details>
-
-7. Add localhost, and ci-pp4-the-diplomat.herokuapp.com to the ALLOWED_HOSTS variable in settings.py
-
-8. Run "python3 manage.py showmigrations" to check the status of the migrations
-
-9. Run "python3 manage.py migrate" to migrate the database
-
-10. Run "python3 manage.py createsuperuser" to create a super/admin user
-
-11. Run "python3 manage.py loaddata categories.json" on the categories file in products/fixtures to create the categories
-
-12. Run "python3 manage.py loaddata products.json" on the products file in products/fixtures to create the products
-
-13. Install gunicorn and add it to the requirements.txt file using the command pip3 freeze > requirements.txt
-
-14. Disable collectstatic in Heroku before any code is pushed using the command heroku config:set DISABLE_COLLECTSTATIC=1 -a ci-pp4-the-diplomat
-<details>
-<img src="https://raw.githubusercontent.com/ArronBeale/CI_PP4_the_diplomat/main/docs/heroku/heroku-deployment-19.PNG">
-<img src="https://raw.githubusercontent.com/ArronBeale/CI_PP4_the_diplomat/main/docs/heroku/heroku-deployment-10.PNG">
-</details>
-
-
-15. Ensure the following environment variables are set in Heroku
-<details>
-<img src="https://raw.githubusercontent.com/ArronBeale/CI_PP4_the_diplomat/main/docs/heroku/heroku-deployment-11.PNG">
-</details>
-
-16. Connect the app to GitHub, you can enable automatic deploys from main if you wish
-<details>
-<img src="https://raw.githubusercontent.com/ArronBeale/CI_PP4_the_diplomat/main/docs/heroku/heroku-deployment-13.PNG">
-<img src="https://raw.githubusercontent.com/ArronBeale/CI_PP4_the_diplomat/main/docs/heroku/heroku-deployment-14.PNG">
-</details>
-
-17. Click manual deploy to deploy your application to Heroku for the first time
-
-18. Click on the view button below to access the application
-
-19. If you encounter any issues accessing the build logs is a good way to troubleshoot the issue
+17. If you encounter any issues accessing the build logs is a good way to troubleshoot the issue
 <hr>
 
 
@@ -1189,11 +1123,11 @@ You can clone the repository by following these steps:
 
 ### Images
 
-The template profile picture 'nobody' was taken form Code Institute learning ressources
+The template profile picture 'default' was taken form Code Institute learning ressources
 
 ### Code
 
-Bootstrap form themes were used
+Bootstrap was used for social media links
 
 ##### Back to [top](#table-of-contents)<hr>
 

@@ -200,6 +200,16 @@ form p .helptext {
     display: none;
 }
 
+input[name="photo"] {
+  display: none;
+}
+
+input[name="photo"] ~ label,
+input[name="photo"]::before,
+input[name="photo"]::after {
+  display: none !important;
+}
+
 /* Dashboard */
 
 .dashboard-sections {

@@ -24,5 +24,18 @@
       </button>
     </form>
   </div>
-  
+
+  <!-- Hide the photo input field as it is still in development -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const photoInput = document.querySelector('input[name="photo"]');
+      if (photoInput) {
+        const container = photoInput.closest("p");
+        if (container) {
+          container.style.display = "none";
+        }
+      }
+    });
+  </script>
+
 {% endblock %}

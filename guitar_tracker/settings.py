@@ -134,7 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', # noqa need to be this long
-    }, 
+    },
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
