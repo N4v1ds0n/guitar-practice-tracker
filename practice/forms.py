@@ -15,9 +15,14 @@ class GoalForm(forms.ModelForm):
         self.fields['goal'].widget.attrs.update({'class': 'goal-select'})
 
         self.fields['goal'].widget.choices = [
-            (goal.pk, f"{goal.title}") for goal in Goal.objects.filter(user=self.user)
+            (goal.pk,
+             f"{goal.title}") for goal in Goal.objects.filter(user=self.user)
         ]
-        self.goal_types = {str(goal.pk): goal.goal_type for goal in Goal.objects.filter(user=self.user)}
+        self.goal_types = {
+            str(goal.pk): goal.goal_type for goal in Goal.objects.filter(
+                user=self.user
+                )
+            }
 
     class Meta:
         model = Goal
@@ -37,27 +42,44 @@ class GoalForm(forms.ModelForm):
         # Routine goal check
         if goal_type == 'routine':
             if not cleaned_data.get('routine_target_days'):
-                self.add_error('routine_target_days', 'This field is required for routine goals.')
+                self.add_error('routine_target_days',
+                               'This field is required for routine goals.')
 
             # Routine should NOT use tempo/accuracy/duration
-            for field in ['target_tempo', 'target_accuracy', 'target_duration']:
+            for field in ['target_tempo',
+                          'target_accuracy',
+                          'target_duration']:
                 if cleaned_data.get(field):
-                    self.add_error(field, f"{field.replace('_', ' ').capitalize()} is not allowed for routine goals.")
+                    self.add_error(
+                        field,
+                        f'''{
+                            field.replace('_', ' ').capitalize()
+                        } is not allowed for routine goals.''')
 
         # Technical or custom goal check
         elif goal_type in ['technique', 'custom']:
-            required_fields = ['target_tempo', 'target_accuracy', 'target_duration']
+            required_fields = ['target_tempo',
+                               'target_accuracy',
+                               'target_duration']
             missing = [f for f in required_fields if not cleaned_data.get(f)]
             if missing:
                 raise forms.ValidationError(
-                    f"Fields required for {goal_type} goals: {', '.join(missing)}"
+                    f'''Fields required for {
+                        goal_type
+                        } goals: {', '.join(missing)}'''
                 )
 
         # Repertoire goals: no numeric attributes
         elif goal_type == 'repertoire':
-            for field in ['target_tempo', 'target_accuracy', 'target_duration', 'routine_target_days']:
+            for field in ['target_tempo',
+                          'target_accuracy',
+                          'target_duration',
+                          'routine_target_days']:
                 if cleaned_data.get(field):
-                    self.add_error(field, f"{field.replace('_', ' ').capitalize()} is not allowed for repertoire goals.")
+                    self.add_error(
+                        field, f'''{
+                            field.replace('_', ' ').capitalize()
+                            } is not allowed for repertoire goals.''')
 
         return cleaned_data
 
@@ -82,7 +104,8 @@ class PracticeSessionForm(forms.ModelForm):
         raw_goal = self.initial.get('goal') or self.data.get('goal')
         if raw_goal:
             try:
-                goal_instance = raw_goal if isinstance(raw_goal, Goal) else Goal.objects.get(pk=raw_goal)
+                goal_instance = raw_goal if isinstance(
+                    raw_goal, Goal) else Goal.objects.get(pk=raw_goal)
             except Goal.DoesNotExist:
                 pass
 

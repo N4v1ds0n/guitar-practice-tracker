@@ -26,10 +26,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('practice/', include('practice.urls')),
-    path('api/standard-goal/', views.get_standard_goal_description, name='standard_goal_description'),
+    path('api/standard-goal/',
+         views.get_standard_goal_description,
+         name='standard_goal_description'),
     path("trigger403/", views.trigger_403, name="trigger_403"),
     path("trigger500/", views.trigger_500, name="trigger_500"),
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

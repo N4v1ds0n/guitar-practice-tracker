@@ -36,28 +36,4 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'first_name', 'last_name', 'email', 'photo')
-
-    def clean_photo(self):
-        photo = self.cleaned_data.get('photo')
-        if photo:
-            if photo.size > 2 * 1024 * 1024:
-                raise forms.ValidationError("Image file too large (max 2MB).")
-            if not photo.content_type.startswith("image/"):
-                raise forms.ValidationError(
-                    "Invalid file type. Upload an image."
-                    )
-        return photo
-
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        if self.cleaned_data.get('photo'):
-            old_user = CustomUser.objects.get(pk=user.pk)
-            old_photo = old_user.photo
-            new_photo = self.cleaned_data['photo']
-            if old_photo and old_photo != new_photo:
-                if hasattr(old_photo, 'path') and os.path.isfile(old_photo.path):
-                    old_photo.delete(save=False)
-        if commit:
-            user.save()
-        return user
+        fields = ('username', 'first_name', 'last_name', 'email')

@@ -1,6 +1,6 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
 from .models import Goal, PracticeSession, StandardGoalDefinition
+
 
 @admin.register(Goal)
 class GoalAdmin(admin.ModelAdmin):
@@ -8,15 +8,16 @@ class GoalAdmin(admin.ModelAdmin):
     list_filter = ('goal_type',)
     search_fields = ('title', 'user__username')
 
+
 @admin.register(PracticeSession)
 class PracticeSessionAdmin(admin.ModelAdmin):
     list_display = ('user', 'goal', 'date', 'duration', 'tempo', 'accuracy')
     list_filter = ('date', 'goal')
     search_fields = ('user__username', 'goal__title')
 
+
 @admin.register(StandardGoalDefinition)
 class StandardGoalDefinitionAdmin(admin.ModelAdmin):
     list_display = ('name', 'goal_type')
     list_filter = ('goal_type',)
     search_fields = ('name',)
-

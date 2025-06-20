@@ -16,7 +16,7 @@ import dj_database_url
 import os
 
 if os.path.isfile('env.py'):
-    import env
+    import env   # noqa  we need to import env to access environment variables
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0*(eg)2h27eu=ykeww4590&s+%baksrn!n7p9d)cju8scuyh4c' # noqa
+SECRET_KEY = (
+    'django-insecure-0*(eg)2h27eu=ykeww4590&s+%baksrn!n7p9d)cju8scuyh4c'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -122,17 +124,17 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator', # noqa
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator', # noqa need to be this long
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', # noqa
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', # noqa need to be this long
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', # noqa
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', # noqa need to be this long
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', # noqa
-    },
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', # noqa need to be this long
+    }, 
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'

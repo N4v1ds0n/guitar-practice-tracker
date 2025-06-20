@@ -194,8 +194,9 @@ form p .helptext {
   margin-top: 0.25rem;
 }
 
-/* hide clear button for profile picture */
-#photo-clear_id {
+/* hide profile picture as it is still in development*/
+#photo-clear_id,
+#id_photo{
     display: none;
 }
 

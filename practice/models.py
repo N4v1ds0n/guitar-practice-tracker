@@ -21,20 +21,28 @@ class StandardGoalDefinition(models.Model):
 
 
 class Goal(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='goals')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE, related_name='goals')
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
-    goal_type = models.CharField(max_length=20, choices=GOAL_TYPE_CHOICES, default='custom')
-    standard_goal = models.ForeignKey(StandardGoalDefinition, on_delete=models.SET_NULL, null=True, blank=True)
-    goal = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name='subgoals')
+    goal_type = models.CharField(max_length=20,
+                                 choices=GOAL_TYPE_CHOICES, default='custom')
+    standard_goal = models.ForeignKey(StandardGoalDefinition,
+                                      on_delete=models.SET_NULL, null=True,
+                                      blank=True)
+    goal = models.ForeignKey('self',
+                             null=True, blank=True, on_delete=models.SET_NULL,
+                             related_name='subgoals')
 
     # Only for technique & custom
     target_tempo = models.PositiveIntegerField(null=True, blank=True)
     target_accuracy = models.FloatField(null=True, blank=True)
-    target_duration = models.PositiveIntegerField(null=True, blank=True)  # in minutes
+    target_duration = models.PositiveIntegerField(null=True,
+                                                  blank=True)
 
     # Only for routine
-    routine_target_days = models.PositiveIntegerField(null=True, blank=True)  # e.g., 7 for perfect week
+    routine_target_days = models.PositiveIntegerField(null=True,
+                                                      blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     target_date = models.DateField(null=True, blank=True)
@@ -81,7 +89,9 @@ class Goal(models.Model):
 
         streak = 1
         for i in range(1, len(sessions)):
-            delta = (sessions[i].date.date() - sessions[i - 1].date.date()).days
+            delta = (
+                (sessions[i].date.date() - sessions[i - 1].date.date()).days
+            )
             if delta == 1:
                 streak += 1
             elif delta > 1:
@@ -95,15 +105,19 @@ class Goal(models.Model):
 
 class PracticeSession(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    goal = models.ForeignKey(Goal, on_delete=models.SET_NULL, null=True, blank=True, related_name='sessions')
+    goal = models.ForeignKey(Goal, on_delete=models.SET_NULL,
+                             null=True, blank=True, related_name='sessions')
     date = models.DateTimeField(default=timezone.now)
 
     # Core attributes used in custom/technical goals
-    duration = models.PositiveIntegerField(help_text="Duration in minutes", null=True, blank=True)
+    duration = models.PositiveIntegerField(help_text="Duration in minutes",
+                                           null=True, blank=True)
     tempo = models.PositiveIntegerField(null=True, blank=True)
-    accuracy = models.FloatField(null=True, blank=True, help_text="Accuracy as percentage (0–100)")
+    accuracy = models.FloatField(null=True, blank=True,
+                                 help_text="Accuracy as percentage (0–100)")
 
     notes = models.TextField(blank=True)
 
     def __str__(self):
-        return f"Session on {self.date.date()} for goal '{self.goal or 'Unlinked'}'"
+        return f"Session on {self.date.date()} for goal '{
+            self.goal or 'Unlinked'}'"

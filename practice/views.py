@@ -10,17 +10,19 @@ from django.core.exceptions import PermissionDenied
 
 
 def about(request):
-    return render(request,'practice/about.html')
+    return render(request, 'practice/about.html')
 
 
 @login_required
 def dashboard(request):
-    goals_queryset = Goal.objects.filter(user=request.user).order_by('-created_at')
-    sessions_queryset = PracticeSession.objects.filter(user=request.user).order_by('-date')
+    goals_queryset = Goal.objects.filter(
+        user=request.user).order_by('-created_at')
+    sessions_queryset = PracticeSession.objects.filter(
+        user=request.user).order_by('-date')
 
     # Paginators
-    goals_paginator = Paginator(goals_queryset, 2)  # 5 goals per page
-    sessions_paginator = Paginator(sessions_queryset, 3)  # 10 sessions per page
+    goals_paginator = Paginator(goals_queryset, 2)
+    sessions_paginator = Paginator(sessions_queryset, 3)
 
     # Get current pages
     goals_page_number = request.GET.get('goals_page')
@@ -37,7 +39,6 @@ def dashboard(request):
 
 def home(request):
     return render(request, 'practice/home.html')
-
 
 
 @login_required
@@ -79,8 +80,8 @@ def goal_edit(request, pk):
             return redirect('goal_detail', pk=goal.pk)
     else:
         form = GoalForm(instance=goal, user=request.user)
-    return render(request, 'practice/goal_form.html', {'form': form, 'edit_mode': True})
-
+    return render(request, 'practice/goal_form.html',
+                  {'form': form, 'edit_mode': True})
 
 
 @login_required
@@ -93,7 +94,9 @@ def goal_delete(request, pk):
 
 @login_required
 def session_create(request):
-    goal_types = {str(goal.id): goal.goal_type for goal in Goal.objects.filter(user=request.user)}
+    goal_types = {str(
+        goal.id
+        ): goal.goal_type for goal in Goal.objects.filter(user=request.user)}
     if request.method == 'POST':
         form = PracticeSessionForm(request.POST, user=request.user)
         if form.is_valid():
@@ -103,13 +106,17 @@ def session_create(request):
             return redirect('dashboard')
     else:
         form = PracticeSessionForm(user=request.user)
-    return render(request, 'practice/session_form.html', {'form': form, 'goal_types': goal_types,})
+    return render(
+        request, 'practice/session_form.html',
+        {'form': form, 'goal_types': goal_types, })
 
 
 @login_required
 def session_create_for_goal(request, goal_id):
     goal = get_object_or_404(Goal, id=goal_id, user=request.user)
-    goal_types = {str(goal.id): goal.goal_type for goal in Goal.objects.filter(user=request.user)}
+    goal_types = {
+        str(goal.id): goal.goal_type for goal in Goal.objects.filter(
+            user=request.user)}
 
     if request.method == 'POST':
         form = PracticeSessionForm(request.POST, user=request.user)
@@ -133,21 +140,26 @@ def session_create_for_goal(request, goal_id):
 @login_required
 def session_detail(request, pk):
     session = get_object_or_404(PracticeSession, pk=pk, user=request.user)
-    return render(request, 'practice/session_detail.html', {'session': session})
+    return render(request, 'practice/session_detail.html', {'session': session}
+                  )
 
 
 @login_required
 def session_edit(request, pk):
     session = get_object_or_404(PracticeSession, pk=pk, user=request.user)
     if request.method == 'POST':
-        form = PracticeSessionForm(request.POST, instance=session, user=request.user)
+        form = PracticeSessionForm(request.POST,
+                                   instance=session, user=request.user)
         if form.is_valid():
             form.save()
             messages.success(request, "Session updated successfully.")
             return redirect('session_detail', pk=session.pk)
     else:
         form = PracticeSessionForm(instance=session, user=request.user)
-    return render(request, 'practice/session_form.html', {'form': form, 'edit_mode': True, 'goal': session.goal})
+    return render(request, 'practice/session_form.html', {'form': form,
+                                                          'edit_mode': True,
+                                                          'goal': session.goal}
+                  )
 
 
 @login_required
@@ -163,7 +175,8 @@ def get_standard_goal_description(request):
     goal_id = request.GET.get('id')
     try:
         goal = StandardGoalDefinition.objects.get(id=goal_id)
-        return JsonResponse({'description': goal.description, 'title': goal.name})
+        return JsonResponse({'description': goal.description,
+                             'title': goal.name})
     except StandardGoalDefinition.DoesNotExist:
         return JsonResponse({'error': 'Goal not found'}, status=404)
 
